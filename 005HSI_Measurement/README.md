@@ -1,2 +1,2 @@
-!\[8 MHz HSI](8MHZ\_HSI.jpg)
+![8 MHz HSI](8MHZ_HSI.jpg)
 
