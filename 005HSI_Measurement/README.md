@@ -1,2 +1,2 @@
-![8 MHz HSI](8MHZ_HSI.jpg)
+![8 MHz HSI](8MHZ_HSI_LogicAnalyser.jpg)
 
