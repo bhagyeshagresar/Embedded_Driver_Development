@@ -1,0 +1,9 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Complementary_Filter_Attitude_Estimation Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:haptic_glove Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:haptic_glove,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:smart_cooling_fan Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:touchBot Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:001HelloWorld,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:002DebugOptions,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Brushed_DC_Motor_Control_Using_STM32 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:005HSI_Measurement
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:001HelloWorld/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:001HelloWorld/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Brushed_DC_Motor_Control_Using_STM32\ Debug/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Brushed_DC_Motor_Control_Using_STM32\ Debug/activeLaunchTarget=null\:---

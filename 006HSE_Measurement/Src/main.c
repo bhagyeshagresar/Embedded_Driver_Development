@@ -66,7 +66,6 @@ int main(void)
 	*pGPIOAAltFunHighReg &= ~( 0xf << 0);
 
 
-
     /* Loop forever */
 	for(;;);
 }

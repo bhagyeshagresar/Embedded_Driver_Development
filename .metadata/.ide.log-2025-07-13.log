@@ -1,0 +1,54 @@
+2025-07-20 00:40:46,510 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,458x277,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 00:42:39,174 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 00:42:40,122 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 00:42:54,850 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 00:42:55,901 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 00:48:43,541 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 00:48:44,997 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 702393512 Bytes (1073741824)
+2025-07-20 00:48:46,486 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 723365032 Bytes (1073741824)
+2025-07-20 00:48:50,621 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 871214248 Bytes (1073741824)
+2025-07-20 00:48:51,011 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-07-20 00:48:51,012 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USART
+2025-07-20 00:48:51,012 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-07-20 00:48:51,012 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-07-20 00:48:51,012 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-07-20 00:48:51,012 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-07-20 00:48:51,013 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-07-20 00:48:51,013 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: I2C
+2025-07-20 00:48:51,015 [INFO] CodeGenerator:882 - code generatio: config db path: C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\
+2025-07-20 00:48:51,020 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 00:48:51,020 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 00:48:51,206 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\license.tmp_save
+2025-07-20 00:48:51,572 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\license.tmp
+2025-07-20 00:48:51,652 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\gpio.tmp_save
+2025-07-20 00:48:51,797 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\gpio.tmp
+2025-07-20 00:48:51,961 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\stm32f4xx_it.c_save
+2025-07-20 00:48:52,066 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\stm32f4xx_it.c
+2025-07-20 00:48:52,074 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\stm32f4xx_it.h_save
+2025-07-20 00:48:52,135 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\stm32f4xx_it.h
+2025-07-20 00:48:52,154 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\stm32f4xx_hal_msp.c_save
+2025-07-20 00:48:52,280 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\stm32f4xx_hal_msp.c
+2025-07-20 00:48:52,287 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\system.tmp_save
+2025-07-20 00:48:52,337 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\system.tmp
+2025-07-20 00:48:52,353 [INFO] CodeEngine:319 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\stm32f4xx_hal_conf.h_save
+2025-07-20 00:48:52,421 [INFO] CodeEngine:343 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\stm32f4xx_hal_conf.h
+2025-07-20 00:48:52,455 [INFO] ApiDbMcu:508 - Load IP Config File for I2C1
+2025-07-20 00:48:52,467 [INFO] ApiDbMcu:508 - Load IP Config File for TIM3
+2025-07-20 00:48:52,481 [INFO] ApiDbMcu:508 - Load IP Config File for TIM4
+2025-07-20 00:48:52,485 [INFO] ApiDbMcu:508 - Load IP Config File for USART2
+2025-07-20 00:48:52,488 [INFO] ApiDbMcu:508 - Load IP Config File for RCC
+2025-07-20 00:48:52,490 [WARN] IPConfigManager:3790 - IP not found : TIM
+2025-07-20 00:48:52,492 [WARN] CodeGenerator:4198 - IP not found : null
+2025-07-20 00:48:52,503 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\main.h_save
+2025-07-20 00:48:52,575 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\main.h
+2025-07-20 00:48:52,585 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\main.c_save
+2025-07-20 00:48:52,715 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\main.c
+2025-07-20 00:48:53,143 [INFO] ProjectBuilder:3324 - Time for Copy HAL[1] : 277mS.
+2025-07-20 00:48:53,150 [INFO] ProjectBuilder:4912 - Project Generator version: 4.6.0.1-B1
+2025-07-20 00:48:53,226 [INFO] ConfigFileManager:1590 - The Die is : DIE433
+2025-07-20 00:48:53,242 [INFO] ApiDbMcu:508 - Load IP Config File for FATFS
+2025-07-20 00:48:53,247 [INFO] ApiDbMcu:508 - Load IP Config File for FREERTOS
+2025-07-20 00:48:53,249 [INFO] ApiDbMcu:508 - Load IP Config File for LIBJPEG
+2025-07-20 00:48:53,255 [INFO] ApiDbMcu:508 - Load IP Config File for MBEDTLS
+2025-07-20 00:48:53,262 [INFO] ApiDbMcu:508 - Load IP Config File for USB_DEVICE
+2025-07-20 00:48:53,265 [INFO] ApiDbMcu:508 - Load IP Config File for USB_HOST

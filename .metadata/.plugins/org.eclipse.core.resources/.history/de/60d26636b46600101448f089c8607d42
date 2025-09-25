@@ -1,0 +1,20 @@
+/*
+ * current.c
+ *
+ *  Created on: Jul 21, 2025
+ *      Author: bhagy
+ */
+
+#include "current.h"
+
+extern volatile float kp_current = 0.01;
+extern volatile float ki_current = 0.05;
+
+
+
+
+void set_current_gains(float kp, float ki){
+		kp_current = kp;
+		ki_current = ki;
+
+}

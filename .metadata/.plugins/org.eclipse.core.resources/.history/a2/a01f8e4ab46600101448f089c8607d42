@@ -1,0 +1,17 @@
+/*
+ * current.c
+ *
+ *  Created on: Jul 21, 2025
+ *      Author: bhagy
+ */
+
+#include "current.h"
+
+
+
+
+void set_current_gains(float kp, float ki){
+		kp_current = kp;
+		ki_current = ki;
+
+}

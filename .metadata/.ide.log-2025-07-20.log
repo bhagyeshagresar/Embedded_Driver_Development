@@ -1,0 +1,87 @@
+2025-07-20 00:48:53,582 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2025-07-20 00:48:55,137 [INFO] ProjectBuilder:5191 - Time for Generating toolchain IDE Files: 1987mS.
+2025-07-20 00:48:55,139 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 1mS.
+2025-07-20 00:48:55,146 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 0mS.
+2025-07-20 01:05:27,874 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 01:05:36,050 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 01:05:37,773 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 01:05:46,482 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 01:05:49,932 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 01:05:51,861 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 01:05:55,498 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 01:06:42,072 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 01:06:47,858 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 02:23:04,914 [INFO] WebApp:194 - Connection lost
+2025-07-20 02:23:05,062 [INFO] WebApp:191 - Connection restablished
+2025-07-20 10:49:03,730 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 10:49:21,982 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-07-20 11:01:30,082 [INFO] WebApp:194 - Connection lost
+2025-07-20 11:01:30,229 [INFO] WebApp:191 - Connection restablished
+2025-07-20 11:15:01,184 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:15:01,184 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:15:01,185 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:15:01,185 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:48,667 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:48,667 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:48,667 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:48,667 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:48,910 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:48,910 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:48,911 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:48,911 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:52,239 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:52,239 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:52,239 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:52,239 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:52,435 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:52,435 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:52,435 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:17:52,435 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:28:09,406 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:28:09,406 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:28:09,406 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:28:09,406 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:28:11,256 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 867130192 Bytes (1073741824)
+2025-07-20 11:28:12,392 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 884955984 Bytes (1073741824)
+2025-07-20 11:28:14,473 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 931016872 Bytes (1073741824)
+2025-07-20 11:28:14,659 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-07-20 11:28:14,660 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USART
+2025-07-20 11:28:14,660 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-07-20 11:28:14,660 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-07-20 11:28:14,660 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-07-20 11:28:14,660 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-07-20 11:28:14,660 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-07-20 11:28:14,660 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-07-20 11:28:14,660 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: I2C
+2025-07-20 11:28:14,661 [INFO] CodeGenerator:882 - code generatio: config db path: C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\
+2025-07-20 11:28:14,663 [WARN] IP:2250 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-07-20 11:28:14,663 [WARN] IP:2250 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-07-20 11:28:14,769 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\license.tmp_save
+2025-07-20 11:28:14,982 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\license.tmp
+2025-07-20 11:28:15,045 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\gpio.tmp_save
+2025-07-20 11:28:15,146 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\gpio.tmp
+2025-07-20 11:28:15,370 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\stm32f4xx_it.c_save
+2025-07-20 11:28:15,578 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\stm32f4xx_it.c
+2025-07-20 11:28:15,589 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\stm32f4xx_it.h_save
+2025-07-20 11:28:15,653 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\stm32f4xx_it.h
+2025-07-20 11:28:15,670 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\stm32f4xx_hal_msp.c_save
+2025-07-20 11:28:15,796 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\stm32f4xx_hal_msp.c
+2025-07-20 11:28:15,808 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\system.tmp_save
+2025-07-20 11:28:15,869 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\MXTmpFiles\system.tmp
+2025-07-20 11:28:15,882 [INFO] CodeEngine:319 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\stm32f4xx_hal_conf.h_save
+2025-07-20 11:28:15,947 [INFO] CodeEngine:343 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\stm32f4xx_hal_conf.h
+2025-07-20 11:28:15,977 [INFO] ApiDbMcu:508 - Load IP Config File for TIM2
+2025-07-20 11:28:15,978 [WARN] IPConfigManager:3790 - IP not found : TIM
+2025-07-20 11:28:15,981 [WARN] CodeGenerator:4198 - IP not found : null
+2025-07-20 11:28:15,992 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\main.h_save
+2025-07-20 11:28:16,080 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Inc\main.h
+2025-07-20 11:28:16,091 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\main.c_save
+2025-07-20 11:28:16,223 [INFO] CodeEngine:287 - Generated code: C:\Users\bhagy\STM32CubeIDE\workspace_1.12.0\Brushed_DC_Motor_Control_Using_STM32\Core\Src\main.c
+2025-07-20 11:28:16,812 [INFO] ProjectBuilder:3324 - Time for Copy HAL[1] : 358mS.
+2025-07-20 11:28:16,822 [INFO] ProjectBuilder:4912 - Project Generator version: 4.6.0.1-B1
+2025-07-20 11:28:16,933 [INFO] ConfigFileManager:1590 - The Die is : DIE433
+2025-07-20 11:28:18,692 [INFO] ProjectBuilder:5191 - Time for Generating toolchain IDE Files: 1869mS.
+2025-07-20 11:28:18,693 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 1mS.
+2025-07-20 11:28:18,707 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 0mS.
+2025-07-20 20:22:53,877 [INFO] WebApp:194 - Connection lost
+2025-07-20 20:22:54,269 [INFO] WebApp:191 - Connection restablished
