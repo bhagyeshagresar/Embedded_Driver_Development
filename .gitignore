@@ -1,0 +1,46 @@
+# Object files, compiled outputs, etc.
+*.o
+*.obj
+*.d
+*.dSYM/
+*.elf
+*.axf
+*.bin
+*.hex
+*.map
+*.lst
+*.i
+*.srec
+*.dfu
+
+# Linker output
+*.ld
+*.ld.generated
+*.out
+
+# Dependency / makefile includes
+*.d
+
+# Build directories
+build/
+bin/
+Debug/
+Release/
+*.build/
+*.dep/
+
+# IDE / tool files
+.vscode/
+.idea/
+*.code-workspace
+*.launch
+*.project
+*.cproject
+*.settings/
+*.mxproject
+*.eww
+*.ewp
+*.ewt
+*.swp
+*.swo
+
