@@ -11,12 +11,12 @@
  * This is a configuration structure for a GPIO pin
  */
 typedef struct{
-	uint8_t GPIO_PinNumber;
-	uint8_t GPIO_PinMode;
-	uint8_t GPIO_PinSpeed;
-	uint8_t GPIO_PinPuPdControl;
-	uint8_t GPIO_PinOPType;
-	uint8_t GPIO_PinAltFundMode;
+	uint8_t GPIO_PinNumber;					/*Possible values from @GPIO_PIN_NUMBERS*/
+	uint8_t GPIO_PinMode;					/*Possible values from @GPIO_PIN_MODES*/
+	uint8_t GPIO_PinSpeed;					/*Possible values from @GPIO_PIN_OUTPUT_SPEEDS*/
+	uint8_t GPIO_PinPuPdControl;			/*Possible values from @GPIO_PIN_PU_PD_MODES*/
+	uint8_t GPIO_PinOPType;					/*Possible values from @GPIO_PIN_OUTPUT_TYPES*/
+	uint8_t GPIO_PinAltFundMode;			/*Possible values from @GPIO_PIN_OUTPUT_SPEEDS*/
 }GPIO_PinConfig_t;
 
 
@@ -28,6 +28,65 @@ typedef struct{
 	GPIO_PinConfig_t GPIO_PinConfig; 		/*!<This holds the GPIO pin configuration settings>*/
 
 }GPIO_Handle_t;
+
+
+/*
+ * @GPIO_PIN_NUMBERS
+ * GPIO pin numbers
+ */
+#define GPIO_PIN_NUM_0		0
+#define GPIO_PIN_NUM_1		1
+#define GPIO_PIN_NUM_2		2
+#define GPIO_PIN_NUM_3		3
+#define GPIO_PIN_NUM_4		4
+#define GPIO_PIN_NUM_5		5
+#define GPIO_PIN_NUM_6		6
+#define GPIO_PIN_NUM_7		7
+#define GPIO_PIN_NUM_8		8
+#define GPIO_PIN_NUM_9		9
+#define GPIO_PIN_NUM_10		10
+#define GPIO_PIN_NUM_11		11
+#define GPIO_PIN_NUM_12		12
+#define GPIO_PIN_NUM_13		13
+#define GPIO_PIN_NUM_14		14
+#define GPIO_PIN_NUM_15		15
+
+
+/*
+ * @GPIO_PIN_MODES
+ * GPIO Pin Possible Modes, refer 8.4.1 GPIO Port mode register in RM0368 for the different modes
+ */
+#define GPIO_MODE_IN		0
+#define GPIO_MODE_OUT		1
+#define GPIO_MODE_ALTFN		2
+#define GPIO_MODE_ANALOG	3
+#define GPIO_MODE_IT_FT		4				//interrupt mode falling edge trigger
+#define	GPIO_MODE_IT_RT		5				//interrupt mode rising edge trigger
+#define	GPIO_MODE_IT_RFT	6				//interrupt mode rising edge + falling edge trigger
+
+/*
+ * @GPIO_PIN_OUTPUT_TYPES
+ * GPIO Pin Output types, refer 8.4.2 GPIO port output type register in RM0368
+ */
+#define GPIO_OP_TYPE_PP		0
+#define GPIO_OP_TYPE_OD		1
+
+/*
+ * @GPIO_PIN_OUTPUT_SPEEDS
+ * GPIO pin possible output speeds, refer 8.4.3 GPIO port output speed register in RM0368
+ */
+#define GPIO_SPEED_LOW		0
+#define GPIO_SPEED_MEDIUM	1
+#define GPIO_SPEED_HIGH		2
+#define GPIO_SPEED_VHIGH	3
+
+/*
+ * @GPIO_PIN_PU_PD_MODES
+ * GPIO pin pull up and pull down macros, refer 8.4.4 GPIO port pull-up/pull-down register
+ */
+#define GPIO_NO_PUPD 		0
+#define GPIO_PIN_PU			1
+#define GPIO_PIN_PD			2
 
 
 /****************************************
