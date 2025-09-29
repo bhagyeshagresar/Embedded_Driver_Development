@@ -16,7 +16,7 @@ typedef struct{
 	uint8_t GPIO_PinSpeed;					/*Possible values from @GPIO_PIN_OUTPUT_SPEEDS*/
 	uint8_t GPIO_PinPuPdControl;			/*Possible values from @GPIO_PIN_PU_PD_MODES*/
 	uint8_t GPIO_PinOPType;					/*Possible values from @GPIO_PIN_OUTPUT_TYPES*/
-	uint8_t GPIO_PinAltFundMode;			/*Possible values from @GPIO_PIN_OUTPUT_SPEEDS*/
+	uint8_t GPIO_PinAltFundMode;			/*Possible values from @GPIO_PIN_ALTFN_MODES*/
 }GPIO_PinConfig_t;
 
 
