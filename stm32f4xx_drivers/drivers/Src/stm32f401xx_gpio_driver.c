@@ -60,7 +60,8 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 	temp = 0;
 
 	//5. Configure the alternate functionality(TODO: later)
-	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN){
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN)
+	{
 		//configure the alt function register
 		uint8_t temp1, temp2;
 
@@ -87,6 +88,30 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 
  */
 void GPIO_Reset(GPIO_RegDef_t *pGPIOx){
+
+	if(pGPIOx == GPIOA)
+	{
+		GPIOA_REG_RESET();
+	}
+	else if(pGPIOx == GPIOB)
+	{
+		GPIOB_REG_RESET();
+	}
+	else if(pGPIOx == GPIOC)
+	{
+		GPIOC_REG_RESET();
+	}
+	else if(pGPIOx == GPIOD)
+	{
+		GPIOD_REG_RESET();
+	}
+	else if(pGPIOx == GPIOE)
+	{
+		GPIOE_REG_RESET();
+	}
+	else if(pGPIOx == GPIOH){
+		GPIOH_REG_RESET();
+	}
 
 }
 
@@ -180,13 +205,16 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi){
 
  */
 uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
+	uint8_t value;
+	value = (uint8_t)((pGPIOx->IDR >> PinNumber)& 0x01);
+	return value;
 
 }
 
 /*********************************************************************
  * @fn      		  - GPIO_ReadFromInputPort
  *
- * @brief             - this function reads data for an entire specific GPIO port
+ * @brief             - this function reads input data registers for an entire specific GPIO port
  *
  * @param[in]         - base address of the GPIO peripheral
  *
@@ -196,6 +224,9 @@ uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
 
  */
 uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx){
+	uint16_t value;
+	value = (uint16_t)(pGPIOx->IDR);
+	return value;
 
 }
 
@@ -216,6 +247,16 @@ uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx){
  */
 void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Value){
 
+	if(Value == GPIO_PIN_SET){
+
+		//write 1 to the output data register at the bit field corresponding to the pin
+		pGPIOx->ODR |= (1 << PinNumber);
+	}
+	else{
+		//Write 0
+		pGPIOx->ODR &= ~(1 << PinNumber);
+	}
+
 }
 
 /*********************************************************************
@@ -232,6 +273,7 @@ void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Val
 
  */
 void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value){
+	pGPIOx->ODR = value;
 
 }
 
@@ -249,6 +291,7 @@ void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value){
 
  */
 void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
+	pGPIOx->ODR ^= (1 << PinNumber);
 
 }
 
