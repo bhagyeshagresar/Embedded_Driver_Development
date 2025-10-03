@@ -218,6 +218,6 @@ typedef struct{
 #define GPIOE_REG_RESET()			do{ (RCC->AHB1RSTR |= (1 << 4)); (RCC->AHB1RSTR &= ~(1 << 4)); }while(0)
 #define GPIOH_REG_RESET()			do{ (RCC->AHB1RSTR |= (1 << 7)); (RCC->AHB1RSTR &= ~(1 << 7)); }while(0)
 
-
+#include "stm32f401xx_gpio_driver.h"
 
 #endif /* INC_STM32F401XX_H_ */
