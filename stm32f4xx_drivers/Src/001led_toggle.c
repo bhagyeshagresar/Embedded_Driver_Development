@@ -1,3 +1,8 @@
+/*
+ * Simple program that shows how to toggle an onboard led (Nucleo-F401RE) using push-pull vs open-drain configuration
+ */
+
+
 #include "stm32f401xx.h"
 
 

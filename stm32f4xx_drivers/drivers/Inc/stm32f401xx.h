@@ -61,7 +61,7 @@
 #define SYSCFG_BASEADDR				(APB2PERIPH_BASEADDR + 0x3800)
 
 /*
- * Peripheral Structure Definitions
+ * Peripheral Structure Definitions. Some of the registers are updated every clock cycle so it is important to declare them as volatile
  */
 
 //GPIO Port Structure Definition
