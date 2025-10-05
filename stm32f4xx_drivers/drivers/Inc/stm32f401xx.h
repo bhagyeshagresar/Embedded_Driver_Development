@@ -118,6 +118,29 @@ typedef struct{
 }RCC_RegDef_t;
 
 
+//EXTI Peripheral Structure definition
+typedef struct
+{
+	volatile uint32_t IMR;		// EXTI Interrupt Mask Register
+	volatile uint32_t EMR;		// EXTI Event Mask Register
+	volatile uint32_t RTSR;		// EXTI Rising Trigger Selection Register
+	volatile uint32_t FTSR;		// EXTI Falling Trigger Selection Register
+	volatile uint32_t SWIER;	// EXTI Software Interrupt Event Register
+	volatile uint32_t PR;		// EXTI Pending Register
+
+}EXTI_RegDef_t;
+
+//SYSCFG Peripheral Structure definition
+typedef struct
+{
+	volatile uint32_t MEMRMP; 					// SYSCFG memory remap register
+	volatile uint32_t PMC;						// SYSCFG peripheral mode configuration register
+	volatile uint32_t EXTICR[4];				// SYSCFG external interrupt configuration registers 1-4
+	volatile uint32_t CMPCR;					// Compensation cell control register
+
+}SYSCFG_RegDef_t;
+
+
 /*
  * Peripheral definitions (Peripheral Base Addresses typecasted to peripheral_RegDef_t)
  */
@@ -129,7 +152,8 @@ typedef struct{
 #define GPIOH 						((GPIO_RegDef_t*)GPIOH_BASEADDR)
 
 #define RCC							((RCC_RegDef_t*)RCC_BASEADDR)
-
+#define EXTI						((EXTI_RegDef_t*)EXTI_BASEADDR)
+#define SYSCFG						((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 /*
  * Clock Enable Macros for GPIOx peripherals, refer 6.3.9 RCC AHB1 peripheral clock Enable Register in RM0368
  */
@@ -222,6 +246,29 @@ typedef struct{
 #define GPIOD_REG_RESET()			do{ (RCC->AHB1RSTR |= (1 << 3)); (RCC->AHB1RSTR &= ~(1 << 3)); }while(0)
 #define GPIOE_REG_RESET()			do{ (RCC->AHB1RSTR |= (1 << 4)); (RCC->AHB1RSTR &= ~(1 << 4)); }while(0)
 #define GPIOH_REG_RESET()			do{ (RCC->AHB1RSTR |= (1 << 7)); (RCC->AHB1RSTR &= ~(1 << 7)); }while(0)
+
+/*
+ * returns port code for a given GPIOx base address
+ */
+#define GPIO_BASEADDR_TO_CODE(x)	((x == GPIOA) ? 0 :\
+									(x == GPIOB) ? 1 :\
+									(x == GPIOC) ? 2 :\
+									(x == GPIOD) ? 3 :\
+									(x == GPIOE) ? 4 :0)
+
+
+/*
+ * IRQ numbers for STM32F401RE, refer Pg. 203 of the reference manual for the vector table
+ */
+#define IRQ_NO_EXTI0				6
+#define IRQ_NO_EXTI1				7
+#define IRQ_NO_EXTI2				8
+#define IRQ_NO_EXTI3				9
+#define IRQ_NO_EXTI4				10
+#define IRQ_NO_EXTI9_5				23
+#define IRQ_NO_EXTI15_10			40
+
+
 
 #include "stm32f401xx_gpio_driver.h"
 
