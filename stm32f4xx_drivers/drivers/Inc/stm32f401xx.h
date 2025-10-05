@@ -17,6 +17,11 @@
 #define GPIO_PIN_SET				SET
 #define GPIO_PIN_RESET				RESET
 
+#define HIGH 1
+#define LOW	 0
+#define BTN_PRESSED					LOW
+#define BTN_RELEASED				HIGH
+
 //Base Addresses of Flash and SRAM
 #define FLASH_BASEADDR				0x08000000U			//Base Address of Flash Memory, refer datasheet Pg.51
 #define SRAM_BASEADDR				0x20000000U			//Base Address of SRAM, refer datasheet Pg.51
@@ -31,7 +36,7 @@
 
 
 //Base Addresses of Peripherals mapped to AHB1 bus (Refer Pg.52 of datasheet, also note: this MCU does not have ports F and G)
-#define GPIOA_BASEADDR				(AHB1PERIPH_BASEADDR + 0x0000)
+#define GPIOA_BASEADDR			    (AHB1PERIPH_BASEADDR + 0x0000)
 #define GPIOB_BASEADDR				(AHB1PERIPH_BASEADDR + 0x0400)
 #define GPIOC_BASEADDR				(AHB1PERIPH_BASEADDR + 0x0800)
 #define GPIOD_BASEADDR				(AHB1PERIPH_BASEADDR + 0x0C00)

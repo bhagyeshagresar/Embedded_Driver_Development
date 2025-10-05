@@ -1,5 +1,5 @@
 /*
- * Program to use the onboard user btn to toggle the onboard led
+ * Program to use an external user btn to toggle an extern led
  */
 
 
@@ -16,9 +16,9 @@ int main(){
 
 	GPIO_Handle_t GpioLED, GpioBtn;
 
-	//configure the led pin (PA5) as output,  push pull configuration
+	//configure the led pin (PA6) as output,  push pull configuration
 	GpioLED.pGPIOx = GPIOA;
-	GpioLED.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_5;
+	GpioLED.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_6;
 	GpioLED.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	GpioLED.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_VHIGH;
 	GpioLED.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP; //set to push pull output
@@ -28,24 +28,25 @@ int main(){
 
 	GPIO_Init(&GpioLED);
 
-	//configure the button pin as input PC13
-	GpioBtn.pGPIOx = GPIOC;
-	GpioBtn.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_13;
+	//configure the button pin as input PB12
+	GpioBtn.pGPIOx = GPIOB;
+	GpioBtn.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_12;
 	GpioBtn.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
 	GpioBtn.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;
-	GpioBtn.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD; //in case of nucleo, there is a pull-up available
+	GpioBtn.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD; //for this case I am using an external pullup(370K)
 
-	GPIO_PeriClockControl(GPIOC, ENABLE);
+	GPIO_PeriClockControl(GPIOB, ENABLE);
 
 	GPIO_Init(&GpioBtn);
 
 	while(1){
-		if(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13) == BTN_PRESSED){
+		if(GPIO_ReadFromInputPin(GPIOB, GPIO_PIN_NUM_12) == BTN_PRESSED){
 			delay(); //add a delay to account for the switch debouncing
-			GPIO_ToggleOutputPin(GPIOA,GPIO_PIN_NUM_5);
+			GPIO_ToggleOutputPin(GPIOA,GPIO_PIN_NUM_6);
 
 		}
 	}
 
 	return 0;
 }
+
