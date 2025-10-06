@@ -58,8 +58,8 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 		}
 
 		//2. Configure the GPIO port selection in SYSCFG_EXTICR
-		uint8_t temp1 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber/4;
-		uint8_t temp2 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber%4;
+		uint8_t temp1 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber/4;					// This decides which SYSCFG_EXTICR[1-4] register to choose
+		uint8_t temp2 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber%4;					// This decides the starting bit position for the portcode
 		uint8_t portcode = GPIO_BASEADDR_TO_CODE(pGPIOHandle->pGPIOx);					// This is to make sure we get the correct port code, refer 7.2.5 SYSCFG_EXTICR3
 		SYSCFG_PCLK_EN();																// make sure the peripheral clock is enabled
 		SYSCFG->EXTICR[temp1] = portcode << (temp2 * 4);
@@ -330,7 +330,7 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
  */
 
 /*********************************************************************
- * @fn      		  - GPIO_IRQConfig
+ * @fn      		  - GPIO_IRQInterruptConfig
  *
  * @brief             -
  *
@@ -343,7 +343,60 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
  * @Note              -  none
 
  */
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnOrDi){
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnOrDi){
+
+	if(EnOrDi == ENABLE){
+		//Enable interrupt
+		if(IRQNumber <= 31){
+			*NVIC_ISER0 |= (1 << IRQNumber);
+		}
+		else if(IRQNumber > 31 && IRQNumber < 64)  //32 to 63
+		{
+			*NVIC_ISER1 |= (1 << (IRQNumber % 32));
+		}
+		else if(IRQNumber >= 64 && IRQNumber < 64) 	//64 to 95
+		{
+			*NVIC_ISER2 |= (1 << (IRQNumber % 64));
+		}
+	}
+	else{
+		//Disable interrupt
+		if(IRQNumber <= 31){
+			*NVIC_ICER0 |= (1 << IRQNumber);
+		}
+		else if(IRQNumber > 31 && IRQNumber < 64)  //32 to 63
+		{
+			*NVIC_ICER1 |= (1 << (IRQNumber % 32));
+		}
+		else if(IRQNumber >= 64 && IRQNumber < 64) 	//64 to 95
+		{
+			*NVIC_ICER2 |= (1 << (IRQNumber % 64));
+		}
+	}
+
+}
+
+/*********************************************************************
+ * @fn      		  - GPIO_IRQPriorityConfig
+ *
+ * @brief             -
+ *
+ * @param[in]         -
+ * @param[in]         -
+ * @param[in]         -
+ *
+ * @return            -  none
+ *
+ * @Note              -  none
+
+ */
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint32_t IRQPriority){
+
+	uint8_t iprx = IRQNumber/4;				//figure out the ipr register
+	uint8_t iprx_section = IRQNumber % 4;	//figure out the section of the ipr register
+
+	uint8_t result = IRQPriority << NO_PR_BITS_IMPLEMENTED;		//IRQPriority = 0000 0100 then the result = 0100 0000
+	*(NVIC_PR_BASEADDR + iprx) |= (result << (8*iprx_section));
 
 }
 
@@ -362,5 +415,12 @@ void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnOrDi){
 
  */
 void GPIO_IRQHandling(uint8_t PinNumber){
+
+	//clear the EXTI PR register corresponding to the pin number. the bit is cleared by programming it to 1. Refer 10.3.6 Pending Register (EXTI_PR) Pg. 211
+
+	if(EXTI->PR & (1 << PinNumber)){
+		//clear the bit corresponding to the pin
+		EXTI->PR |= (1 << PinNumber);
+	}
 
 }

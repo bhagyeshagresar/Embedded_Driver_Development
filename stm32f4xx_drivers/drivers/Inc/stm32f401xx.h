@@ -9,6 +9,39 @@
 
 #include <stdint.h>
 
+
+/*************************************** Cortex M4 Specific macros definitions *******************************************/
+
+/*
+ * ARM Cortex-M4 NVIC ISERx(Interrupt Set-enable Register) Addresses, Refer Pg. 4-3 of Cortex M4 user guide
+ * TODO: Look into moving this to a structure definition
+ */
+#define NVIC_ISER0					((volatile uint32_t*)0xE000E100) 			//Address offset 0xE100
+#define NVIC_ISER1					((volatile uint32_t*)0xE000E104) 			//Address offset 0xE104
+#define NVIC_ISER2					((volatile uint32_t*)0xE000E108) 			//Address offset 0xE108
+#define NVIC_ISER3					((volatile uint32_t*)0xE000E10C) 			//Address offset 0xE10C
+
+/*
+ * ARM Cortex-M4 NVIC ICERx(Interrupt Clear-enable Register) Addresses, Refer Pg. 4-3 of Cortex M4 user guide
+ * TODO: Look into moving this to a structure definition
+ */
+#define NVIC_ICER0					((volatile uint32_t*)0xE000E180) 			//Address offset 0xE180
+#define NVIC_ICER1					((volatile uint32_t*)0xE000E184) 			//Address offset 0xE184
+#define NVIC_ICER2					((volatile uint32_t*)0xE000E188) 			//Address offset 0xE188
+#define NVIC_ICER3					((volatile uint32_t*)0xE000E18C) 			//Address offset 0xE18C
+
+
+/*
+ * ARM Cortex Mx Processor Priority Register Address Calculation, Refer Pg. 4-3 of Cortex M4 user guide
+ * There are total of 60 (0 - 59) Interrupt priority registers. It is easier to program using pointer to the base address
+ */
+#define NVIC_PR_BASEADDR			((volatile uint32_t*)0xE000E400)
+
+/*
+ * ARM Cortex Mx Processor number of priority bits implemented in Priority Register
+ */
+#define NO_PR_BITS_IMPLEMENTED  4
+
 //Generic Macros
 #define ENABLE 						1
 #define DISABLE 					0
