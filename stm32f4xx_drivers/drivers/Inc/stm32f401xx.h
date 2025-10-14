@@ -103,7 +103,8 @@
  */
 
 //GPIO Port Structure Definition
-typedef struct{
+typedef struct
+{
 	volatile uint32_t MODER;		// GPIO Port mode register
 	volatile uint32_t OTYPER;		// GPIO Port output type register
 	volatile uint32_t OSPEEDR;		// GPIO port output speed register
@@ -113,8 +114,23 @@ typedef struct{
 	volatile uint32_t BSRR;			// GPIO port bit set/reset register
 	volatile uint32_t LCKR;			// GPIO port configuration lock register
 	volatile uint32_t AFR[2];		// GPIO alternate function register
-
 }GPIO_RegDef_t;
+
+
+//SPI Structure Definition
+typedef struct
+{
+	volatile uint32_t CR1;			// SPI control register 1 				Address offset: 0x00
+	volatile uint32_t CR2;			// SPI control register 2				Address offset: 0x04
+	volatile uint32_t SR;			// SPI status register					Address offset: 0x08
+	volatile uint32_t DR;			// SPI data register					Address offset: 0x0C
+	volatile uint32_t CRCPR;		// SPI CRC polynomial register 			Address offset: 0x10
+	volatile uint32_t RXCRCR;		// SPI RX CRC register					Address offset: 0x14
+	volatile uint32_t TXCRCR;		// SPI TX CRC register					Address offset: 0x18
+	volatile uint32_t I2SCFGR;		// SPI_I2S configuration register		Address offset: 0x1C
+	volatile uint32_t I2SPR;		// SPI_I2S prescaler register			Address offset: 0x20
+}SPI_RegDef_t;
+
 
 
 //RCC Peripheral Structure Definition
@@ -160,7 +176,6 @@ typedef struct
 	volatile uint32_t FTSR;		// EXTI Falling Trigger Selection Register
 	volatile uint32_t SWIER;	// EXTI Software Interrupt Event Register
 	volatile uint32_t PR;		// EXTI Pending Register
-
 }EXTI_RegDef_t;
 
 //SYSCFG Peripheral Structure definition
@@ -170,7 +185,6 @@ typedef struct
 	volatile uint32_t PMC;						// SYSCFG peripheral mode configuration register
 	volatile uint32_t EXTICR[4];				// SYSCFG external interrupt configuration registers 1-4
 	volatile uint32_t CMPCR;					// Compensation cell control register
-
 }SYSCFG_RegDef_t;
 
 
@@ -183,6 +197,11 @@ typedef struct
 #define GPIOD 						((GPIO_RegDef_t*)GPIOD_BASEADDR)
 #define GPIOE 						((GPIO_RegDef_t*)GPIOE_BASEADDR)
 #define GPIOH 						((GPIO_RegDef_t*)GPIOH_BASEADDR)
+
+#define SPI1						((SPI_RegDef_t*)SPI1_BASEADDR)
+#define SPI2 						((SPI_RegDef_t*)SPI2_BASEADDR)
+#define SPI3 						((SPI_RegDef_t*)SPI3_BASEADDR)
+#define SPI4 						((SPI_RegDef_t*)SPI4_BASEADDR)
 
 #define RCC							((RCC_RegDef_t*)RCC_BASEADDR)
 #define EXTI						((EXTI_RegDef_t*)EXTI_BASEADDR)
