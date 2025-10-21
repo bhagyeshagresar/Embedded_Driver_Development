@@ -49,6 +49,8 @@
 #define RESET						DISABLE
 #define GPIO_PIN_SET				SET
 #define GPIO_PIN_RESET				RESET
+#define FLAG_SET					SET
+#define FLAG_RESET					RESET
 
 #define HIGH 1
 #define LOW	 0
@@ -298,6 +300,15 @@ typedef struct
 #define GPIOD_REG_RESET()			do{ (RCC->AHB1RSTR |= (1 << 3)); (RCC->AHB1RSTR &= ~(1 << 3)); }while(0)
 #define GPIOE_REG_RESET()			do{ (RCC->AHB1RSTR |= (1 << 4)); (RCC->AHB1RSTR &= ~(1 << 4)); }while(0)
 #define GPIOH_REG_RESET()			do{ (RCC->AHB1RSTR |= (1 << 7)); (RCC->AHB1RSTR &= ~(1 << 7)); }while(0)
+
+/*
+ * Macros to reset SPIx peripherals
+ */
+#define SPI1_REG_RESET()			do{(RCC->APB2RSTR |= (1 << 12)); (RCC->APB2RSTR &= ~(1 << 12)); }while(0)
+#define SPI2_REG_RESET()			do{(RCC->APB1RSTR |= (1 << 14)); (RCC->APB2RSTR &= ~(1 << 14)); }while(0)
+#define SPI3_REG_RESET()			do{(RCC->APB1RSTR |= (1 << 15)); (RCC->APB2RSTR &= ~(1 << 15)); }while(0)
+#define SPI4_REG_RESET()			do{(RCC->APB2RSTR |= (1 << 13)); (RCC->APB2RSTR &= ~(1 << 13)); }while(0)
+
 
 /*
  * returns port code for a given GPIOx base address

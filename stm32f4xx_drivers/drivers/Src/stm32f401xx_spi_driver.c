@@ -7,6 +7,16 @@
 
 
 
+uint8_t SPI_GetFlagStatus(SPI_RegDef_t *pSPIx, uint32_t FlagName){
+
+	if(pSPIx->SR & FlagName){
+		return FLAG_SET;
+	}
+	return FLAG_RESET;
+}
+
+
+
 /*
  * Init and Reset
  */
@@ -25,6 +35,50 @@
  */
 void SPI_Init(SPI_Handle_t *pSPIHandle){
 
+	//lets configure the SPI_CR1 register
+
+	uint32_t tempReg = 0;
+
+	//1. Configure the device mode
+	tempReg |= pSPIHandle->SPIConfig.SPI_DeviceMode << SPI_CR1_MSTR;
+
+	//2. Configure the bus config
+	if(pSPIHandle->SPIConfig.SPI_BusConfig == SPI_BUS_CONFIG_FD){
+		//clear the  bidi mode bit
+		tempReg &= ~(1 << SPI_CR1_BIDIMODE);
+	}
+	else if(pSPIHandle->SPIConfig.SPI_BusConfig == SPI_BUS_CONFIG_HD)
+	{
+		//set the bidi mode bit
+		tempReg |= (1 << SPI_CR1_BIDIMODE);
+	}
+	else if(pSPIHandle->SPIConfig.SPI_BusConfig == SPI_BUS_CONFIG_SIMPLEX_RXONLY){
+
+		//clear the bidi mode bit
+		tempReg &= ~(1 << SPI_CR1_BIDIMODE);
+
+		//set the rxonly bit
+		tempReg |= (1 << SPI_CR1_RXONLY);
+
+	}
+
+	//3. Configure the SPI SCLK speed
+	tempReg |= (pSPIHandle->SPIConfig.SPI_SclkSpeed << SPI_CR1_BR);
+
+	//4. Configure the DFF
+	tempReg |= (pSPIHandle->SPIConfig.SPI_DFF << SPI_CR1_DFF);
+
+	//5. Configure the CPOL
+	tempReg |= (pSPIHandle->SPIConfig.SPI_CPOL << SPI_CR1_CPOL);
+
+	//6. Configure the CPHA
+	tempReg |= (pSPIHandle->SPIConfig.SPI_CPHA << SPI_CR1_CPHA);
+
+	//7. Configure SSM
+	tempReg |= (pSPIHandle->SPIConfig.SPI_SSM << SPI_CR1_SSM);
+
+	pSPIHandle->pSPIx->CR1 = tempReg;
+
 
 }
 
@@ -42,6 +96,19 @@ void SPI_Init(SPI_Handle_t *pSPIHandle){
 
  */
 void SPI_Reset(SPI_RegDef_t *pSPIx){
+
+	if(pSPIx == SPI1){
+		SPI1_REG_RESET();
+	}
+	else if(pSPIx == SPI2){
+		SPI2_REG_RESET();
+	}
+	else if(pSPIx == SPI3){
+		SPI3_REG_RESET();
+	}
+	else if(pSPIx == SPI4){
+		SPI4_REG_RESET();
+	}
 
 }
 
@@ -105,7 +172,7 @@ void SPI_PeriClockControl(SPI_RegDef_t *pSPIx, uint8_t EnorDi){
 /*********************************************************************
  * @fn      		  - SPI_SendData
  *
- * @brief             - This function sends data over MOSI line
+ * @brief             - This function sends data over MOSI line (blocking)
  *
  * @param[in]         - base address of the SPI peripheral
  * @param[in]         - pointer to transmit buffer
@@ -113,10 +180,35 @@ void SPI_PeriClockControl(SPI_RegDef_t *pSPIx, uint8_t EnorDi){
  *
  * @return            -  none
  *
- * @Note              -  none
+ * @Note              -  This is a blocking call
 
  */
 void SPI_SendData(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t Len){
+
+	//this is a blocking call, until all the bytes are transferred, the code will be stuck in this while loop
+	while(Len > 0){
+
+		//1. wait until Tx buffer is empty
+		while(SPI_GetFlagStatus(pSPIx, SPI_TXE_FLAG) == FLAG_RESET); /*Note: Here we are polling SPI_TXE flag*/
+
+		//2. Check the DFF bit in CR1
+		if((pSPIx->CR1 & (1 << SPI_CR1_DFF))){
+			//16bit dff
+			//1. load data in the DR register
+			pSPIx->DR = *((uint16_t*)pTxBuffer);
+			Len -= 2;
+			(uint16_t*)pTxBuffer++;
+		}
+		else{
+			//8bit dff
+			//1. load data in the DR register
+			pSPIx->DR = *pTxBuffer;
+			Len--;
+			pTxBuffer++;
+		}
+
+	}
+
 
 }
 

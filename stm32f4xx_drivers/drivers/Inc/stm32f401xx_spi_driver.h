@@ -93,6 +93,12 @@ typedef struct
 #define SPI_SSM_DI			0
 
 
+/*
+ * SPI related status definitions
+ */
+#define SPI_TXE_FLAG		(1 << SPI_SR_TXE) //this sits here because it is SPI specific
+#define SPI_RXNE_FLAG		(1 << SPI_SR_RXNE) //this sits here because it is SPI specific
+
 
 
 /****************************************
