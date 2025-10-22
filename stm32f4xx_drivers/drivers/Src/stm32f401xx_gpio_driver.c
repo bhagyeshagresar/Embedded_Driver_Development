@@ -25,6 +25,9 @@
  */
 void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 
+	//let's enable the clock here since it needs to be done everytime we initialise a peripheral
+	GPIO_PeriClockControl(pGPIOHandle->pGPIOx, ENABLE);
+
 	uint32_t temp = 0;
 
 	//1. Configure the mode of the GPIO pin

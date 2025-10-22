@@ -35,6 +35,9 @@ uint8_t SPI_GetFlagStatus(SPI_RegDef_t *pSPIx, uint32_t FlagName){
  */
 void SPI_Init(SPI_Handle_t *pSPIHandle){
 
+	//let's enable the clock here since it needs to be done everytime we initialise a peripheral
+	SPI_PeriClockControl(pSPIHandle->pSPIx, ENABLE);
+
 	//lets configure the SPI_CR1 register
 
 	uint32_t tempReg = 0;
