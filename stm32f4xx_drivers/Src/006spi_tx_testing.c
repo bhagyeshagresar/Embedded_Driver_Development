@@ -50,9 +50,11 @@ void SPI2_GPIOInit(void)
 
 }
 
+
+//This function initialises the SPI config structure and also initialises the SPI peripheral
 void SPI2_Init(void){
 	SPI_Handle_t SPI2handle;
-
+	//fill out the SPI configuration structure and pass it to SPI init to initialise the SPI peripheral
 	SPI2handle.pSPIx = SPI2;
 	SPI2handle.SPIConfig.SPI_BusConfig = SPI_BUS_CONFIG_FD;
 	SPI2handle.SPIConfig.SPI_DeviceMode = SPI_DEVICE_MODE_MASTER;
@@ -73,6 +75,10 @@ int main(void){
 
 	SPI2_Init(); //initialise the SPI2 peripheral handle structure
 
+	//enable the SPI peripheral
+	SPI_PeripheralControl(SPI2, ENABLE);
+
+	//SPI send data blocking call
 	SPI_SendData(SPI2, (uint8_t*)user_data, strlen(user_data));
 
 	while(1);

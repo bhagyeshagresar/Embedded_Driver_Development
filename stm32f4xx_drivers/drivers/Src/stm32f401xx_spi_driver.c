@@ -244,3 +244,14 @@ void SPI_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority);
 void SPI_IRQHandling(SPI_Handle_t *pSPIHandle);
 
 
+void SPI_PeripheralControl(SPI_RegDef_t *pSPIx, uint8_t EnOrDi){
+
+	if(EnOrDi == ENABLE){
+		pSPIx->CR1 |= (1 << SPI_CR1_SPE);
+	}
+	else{
+		pSPIx->CR1 &= ~(1 << SPI_CR1_SPE);
+	}
+
+
+}
