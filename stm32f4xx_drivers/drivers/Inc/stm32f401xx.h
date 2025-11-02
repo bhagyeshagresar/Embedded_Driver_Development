@@ -438,9 +438,28 @@ typedef struct
 #define USART_CR1_UE		13
 #define USART_CR1_OVER8		15
 
+/*
+ * Bit position defintions for USART_CR2
+ */
+#define USART_CR2_CPHA		9
+#define USART_CR2_CPOL		10
+#define USART_CR2_CLKEN		11
+#define USART_CR2_STOP		12
+
+/*
+ * Bit position defintions for USART_CR3
+ */
+#define USART_CR3_DMAR		6
+#define USART_CR3_DMAT		7
+#define USART_CR3_RTSE		8
+#define USART_CR3_CTSE		9
+#define USART_CR3_CTSIE		10
+
+
 
 //these includes are for the main applications files so that a single include of "stm32f401xx" gives you everything related to the MCU
 #include "stm32f401xx_gpio_driver.h"
 #include "stm32f401xx_spi_driver.h"
+#include "stm32f401xx_usart_driver.h"
 
 #endif /* INC_STM32F401XX_H_ */
