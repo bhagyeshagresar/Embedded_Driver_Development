@@ -134,6 +134,20 @@ typedef struct
 }SPI_RegDef_t;
 
 
+//UART Structure Definition
+typedef struct
+{
+	volatile uint32_t USART_SR;		//USART status register									Address offset: 0x00
+	volatile uint32_t USART_DR;		//USART data register									Address offset: 0x04
+	volatile uint32_t USART_BRR;	//USART baud rate register								Address offset: 0x08
+	volatile uint32_t USART_CR1;	//USART control register 1								Address offset: 0x0C
+	volatile uint32_t USART_CR2;	//USART control register 2								Address offset: 0x10
+	volatile uint32_t USART_CR3;	//USART control register 3								Address offset: 0x14
+	volatile uint32_t USART_GTPR;	//USART guard time and prescaler register				Address offset: 0x18
+}USART_RegDef_t;
+
+
+
 
 //RCC Peripheral Structure Definition
 typedef struct{
@@ -204,6 +218,10 @@ typedef struct
 #define SPI2 						((SPI_RegDef_t*)SPI2_BASEADDR)
 #define SPI3 						((SPI_RegDef_t*)SPI3_BASEADDR)
 #define SPI4 						((SPI_RegDef_t*)SPI4_BASEADDR)
+
+#define USART1						((USART_RegDef_t*)USART1_BASEADDR)
+#define USART2						((USART_RegDef_t*)USART2_BASEADDR)
+#define USART6						((USART_RegDef_t*)USART6_BASEADDR)
 
 #define RCC							((RCC_RegDef_t*)RCC_BASEADDR)
 #define EXTI						((EXTI_RegDef_t*)EXTI_BASEADDR)
@@ -309,6 +327,12 @@ typedef struct
 #define SPI3_REG_RESET()			do{(RCC->APB1RSTR |= (1 << 15)); (RCC->APB2RSTR &= ~(1 << 15)); }while(0)
 #define SPI4_REG_RESET()			do{(RCC->APB2RSTR |= (1 << 13)); (RCC->APB2RSTR &= ~(1 << 13)); }while(0)
 
+/*
+ * Macros to reset USARTx peripherals
+ */
+#define USART1_REG_RESET()			do{(RCC->APB2RSTR |= (1 << 4)); (RCC->APB2RSTR &= ~(1 << 4));}while(0)
+#define USART2_REG_RESET()			do{(RCC->APB2RSTR |= (1 << 17)); (RCC->APB2RSTR &= ~(1 << 17));}while(0)
+#define USART6_REG_RESET()			do{(RCC->APB2RSTR |= (1 << 5)); (RCC->APB2RSTR &= ~(1 << 5));}while(0)
 
 /*
  * returns port code for a given GPIOx base address
@@ -398,6 +422,24 @@ typedef struct
 #define SPI_SR_FRE			8
 
 
+/************************* Bit Position Defintions for UART ****************************************/
+
+/*
+ * Bit position defintions for USART_CR1
+ */
+#define USART_CR1_REWAKEUP	1
+#define USART_CR1_RXEN		2
+#define USART_CR1_TXEN		3
+#define USART_CR1_RXNE		5
+#define USART_CR1_TXE		7
+#define USART_CR1_PS		9
+#define USART_CR1_PCE		10
+#define USART_CR1_M			12
+#define USART_CR1_UE		13
+#define USART_CR1_OVER8		15
+
+
+//these includes are for the main applications files so that a single include of "stm32f401xx" gives you everything related to the MCU
 #include "stm32f401xx_gpio_driver.h"
 #include "stm32f401xx_spi_driver.h"
 
