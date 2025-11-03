@@ -45,6 +45,7 @@ typedef struct
 
 /*
  * @USART_Baud
+ * For 16MHZ the max aud rate that can be achieved is 3MBps (Pg. 523 of RM0368 Table 76)
  */
 #define USART_BAUDRATE_1200		1200
 #define USART_BAUDRATE_2400		2400
@@ -104,6 +105,28 @@ typedef struct
  */
 void USART_PeripheralClockControl(USART_RegDef_t *pUSARTx, uint8_t State);
 
+
+/*
+ * Init and De-init
+ */
+void USART_Init(USART_Handle_t *pUSARTHandle);
+void USART_Reset(USART_RegDef_t *pUSARTx);
+
+
+
+/*
+ * IRQ Config and ISR handling
+ */
+void USART_IRQInterruptConfig(uint8_t IRQNumber, uint8_t State);
+void USART_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
+
+
+/*
+ * Other USART Peripheral APIs
+ */
+void USART_PeripheralControl(USART_RegDef_t *pUSARTx, uint8_t State);
+uint8_t USART_GetFlagStatus(USART_RegDef_t *pUSARTx, uint8_t StatusFlagName);
+void USART_ClearFlag(USART_RegDef_t *pUSARTx, uint16_t StatusFlagName);
 
 
 
