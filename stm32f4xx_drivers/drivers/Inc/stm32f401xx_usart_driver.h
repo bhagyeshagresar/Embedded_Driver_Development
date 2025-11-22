@@ -91,6 +91,13 @@ typedef struct
 #define USART_HW_FLOW_CTRL_CTS_RTS	3
 
 
+/*
+ * USART flags
+ */
+
+#define USART_FLAG_TXE 			( 1 << USART_SR_TXE)
+#define USART_FLAG_RXNE 		( 1 << USART_SR_RXNE)
+#define USART_FLAG_TC 			( 1 << USART_SR_TC)
 
 
 
@@ -107,7 +114,7 @@ void USART_PeripheralClockControl(USART_RegDef_t *pUSARTx, uint8_t State);
 
 
 /*
- * Init and De-init
+ * Init and Reset
  */
 void USART_Init(USART_Handle_t *pUSARTHandle);
 void USART_Reset(USART_RegDef_t *pUSARTx);
@@ -128,9 +135,13 @@ void USART_PeripheralControl(USART_RegDef_t *pUSARTx, uint8_t State);
 uint8_t USART_GetFlagStatus(USART_RegDef_t *pUSARTx, uint8_t StatusFlagName);
 void USART_ClearFlag(USART_RegDef_t *pUSARTx, uint16_t StatusFlagName);
 
-
-
-
+/*
+ * USART send and receive data API
+ */
+void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t Len);
+void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_t Len);
+uint8_t USART_SendDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pTxBuffer, uint32_t Len);
+uint8_t USART_ReceiveDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pRxBuffer, uint32_t Len);
 
 
 
