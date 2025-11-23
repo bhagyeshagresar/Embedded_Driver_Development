@@ -432,6 +432,7 @@ typedef struct
 #define USART_CR1_TXEN		3
 #define USART_CR1_RXNE		5
 #define USART_CR1_TXEIE		7
+#define USART_CR1_TCIE		6
 #define USART_CR1_PS		9
 #define USART_CR1_PCE		10
 #define USART_CR1_M			12
@@ -476,5 +477,6 @@ typedef struct
 #include "stm32f401xx_gpio_driver.h"
 #include "stm32f401xx_spi_driver.h"
 #include "stm32f401xx_usart_driver.h"
+#include "stm32f401xx_rcc_driver.h"
 
 #endif /* INC_STM32F401XX_H_ */

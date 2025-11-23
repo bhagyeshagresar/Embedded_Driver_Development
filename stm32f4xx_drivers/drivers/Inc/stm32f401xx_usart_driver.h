@@ -33,6 +33,12 @@ typedef struct
 {
 	USART_RegDef_t* pUSARTx;
 	USART_Config_t USART_Config;
+	uint8_t *pTxBuffer;
+	uint8_t *pRxBuffer;
+	uint32_t TxLen;
+	uint32_t RxLen;
+	uint8_t TxBusyState;
+	uint8_t RxBusyState;
 }USART_Handle_t;
 
 
@@ -92,12 +98,21 @@ typedef struct
 
 
 /*
- * USART flags
+ * USART flags - used with status register
  */
 
 #define USART_FLAG_TXE 			( 1 << USART_SR_TXE)
 #define USART_FLAG_RXNE 		( 1 << USART_SR_RXNE)
 #define USART_FLAG_TC 			( 1 << USART_SR_TC)
+
+
+/*
+ * Application states
+ */
+#define USART_BUSY_IN_RX 1
+#define USART_BUSY_IN_TX 2
+#define USART_READY 0
+
 
 
 
@@ -134,14 +149,15 @@ void USART_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 void USART_PeripheralControl(USART_RegDef_t *pUSARTx, uint8_t State);
 uint8_t USART_GetFlagStatus(USART_RegDef_t *pUSARTx, uint8_t StatusFlagName);
 void USART_ClearFlag(USART_RegDef_t *pUSARTx, uint16_t StatusFlagName);
+void USART_SetBaudRate(USART_RegDef_t *pUSARTx, uint32_t BaudRate);
 
 /*
  * USART send and receive data API
  */
 void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t Len);
 void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_t Len);
-uint8_t USART_SendDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pTxBuffer, uint32_t Len);
-uint8_t USART_ReceiveDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pRxBuffer, uint32_t Len);
+uint8_t USART_SendDataWithIT(USART_Handle_t *pUSARTHandle,uint8_t *pTxBuffer, uint32_t Len);
+uint8_t USART_ReceiveWithDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pRxBuffer, uint32_t Len);
 
 
 

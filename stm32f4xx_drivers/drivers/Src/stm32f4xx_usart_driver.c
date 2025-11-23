@@ -19,7 +19,7 @@
  *
  * @return            -
  *
- * @Note              -
+ * @Note              - The procedure for this is given in the RM0368 character transmission and reception section of USART peripheral
 
  */
 void USART_Init(USART_Handle_t *pUSARTHandle)
@@ -37,17 +37,17 @@ void USART_Init(USART_Handle_t *pUSARTHandle)
 	if ( pUSARTHandle->USART_Config.USART_Mode == USART_MODE_ONLY_RX)
 	{
 		//Implement the code to enable the Receiver bit field
-		tempReg|= (1 << USART_CR1_TXEN);
+		tempReg|= (1 << USART_CR1_RXEN);
 	}
 
 	else if (pUSARTHandle->USART_Config.USART_Mode == USART_MODE_ONLY_TX)
 	{
 		//Implement the code to enable the Transmitter bit field
-		tempReg |= ( 1 << USART_CR1_RXEN);
+		tempReg |= ( 1 << USART_CR1_TXEN);
 
 	}
 
-	else if (pUSARTHandle->USART_Config.USART_Mode == USART_MODE_TXRX)
+	else if (pUSARTHandle->USART_Config.USART_Mode == USART_MODE_RXTX)
 	{
 		//Implement the code to enable the both Transmitter and Receiver bit fields
 		tempReg |= ( ( 1 << USART_CR1_TXEN) | ( 1 << USART_CR1_RXEN) );
@@ -78,7 +78,7 @@ void USART_Init(USART_Handle_t *pUSARTHandle)
 	}
 
    //Program the CR1 register
-	pUSARTHandle->pUSARTx->CR1 = tempReg;
+	pUSARTHandle->pUSARTx->USART_CR1 = tempReg;
 
 /******************************** Configuration of CR2******************************************/
 
@@ -88,7 +88,7 @@ void USART_Init(USART_Handle_t *pUSARTHandle)
 	tempReg |= pUSARTHandle->USART_Config.USART_NoOfStopBits << USART_CR2_STOP;
 
 	//Program the CR2 register
-	pUSARTHandle->pUSARTx->CR2 = tempreg;
+	pUSARTHandle->pUSARTx->USART_CR2 = tempReg;
 
 /******************************** Configuration of CR3******************************************/
 
@@ -109,16 +109,17 @@ void USART_Init(USART_Handle_t *pUSARTHandle)
 	}else if (pUSARTHandle->USART_Config.USART_HWFlowControl == USART_HW_FLOW_CTRL_CTS_RTS)
 	{
 		//Implement the code to enable both CTS and RTS Flow control
-		tempreg |= (( 1 << USART_CR3_CTSE) | (1 << USART_CR3_RTSE));
+		tempReg |= (( 1 << USART_CR3_CTSE) | (1 << USART_CR3_RTSE));
 	}
 
 
-	pUSARTHandle->pUSARTx->CR3 = tempReg;
+	pUSARTHandle->pUSARTx->USART_CR3 = tempReg;
 
 /******************************** Configuration of BRR(Baudrate register)******************************************/
 
 	//Implement the code to configure the baud rate
 	//We will cover this in the lecture. No action required here
+	USART_SetBaudRate(pUSARTHandle->pUSARTx, pUSARTHandle->USART_Config.USART_Baud);
 
 }
 
@@ -217,7 +218,7 @@ void USART_Reset(USART_RegDef_t *pUSARTx)
  */
 uint8_t USART_GetFlagStatus(USART_RegDef_t *pUSARTx, uint8_t StatusFlagName)
 {
-	if(pUSARTx->SR & StatusFlagName)
+	if(pUSARTx->USART_SR & StatusFlagName)
 	{
 		return FLAG_SET;
 	}
@@ -240,7 +241,7 @@ uint8_t USART_GetFlagStatus(USART_RegDef_t *pUSARTx, uint8_t StatusFlagName)
  */
 void USART_ClearFlag(USART_RegDef_t *pUSARTx, uint16_t StatusFlagName)
 {
-	pUSARTx->SR &= ~( StatusFlagName);
+	pUSARTx->USART_SR &= ~( StatusFlagName);
 
 }
 
@@ -269,7 +270,7 @@ void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t L
 
 	uint16_t *pdata; //used if the word length is 9 bits
    //Loop over until "Len" number of bytes are transferred
-	for(uint32_t i = 0 ; i < LEN; i++)
+	for(uint32_t i = 0 ; i < Len; i++)
 	{
 		//Implement the code to wait until TXE flag is set in the SR
 		while(! USART_GetFlagStatus(pUSARTHandle->pUSARTx,USART_FLAG_TXE));
@@ -299,7 +300,7 @@ void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t L
 		else
 		{
 			//This is 8bit data transfer
-			pUSARTHandle->pUSARTx->DR = *pTxBuffer;
+			pUSARTHandle->pUSARTx->USART_DR = *pTxBuffer;
 
 			//Implement the code to increment the buffer address
 			pTxBuffer++;
@@ -314,13 +315,13 @@ void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t L
 /*********************************************************************
  * @fn      		  - USART_ReceiveData
  *
- * @brief             -
+ * @brief             - Receive data in blocking mode
  *
- * @param[in]         -
- * @param[in]         -
- * @param[in]         -
+ * @param[in]         - pointer to a UART handle
+ * @param[in]         - pointer to software receive buffer
+ * @param[in]         - number of bytes to send
  *
- * @return            -
+ * @return            - none
  *
  * @Note              -
 
@@ -329,7 +330,7 @@ void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t L
 void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_t Len)
 {
    //Loop over until "Len" number of bytes are transferred
-	for(uint32_t i = 0 ; i < LEN; i++)
+	for(uint32_t i = 0 ; i < Len; i++)
 	{
 		//Implement the code to wait until RXNE flag is set in the SR
 		While(!USART_GetFlagStatus(pUSARTHandle->pUSARTx, USART_FLAG_RXNE));
@@ -345,7 +346,7 @@ void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_
 				//No parity is used. so, all 9bits will be of user data
 
 				//read only first 9 bits. so, mask the DR with 0x01FF
-				*((uint16_t*) pRxBuffer) = (pUSARTHandle->pUSARTx->DR  & (uint16_t)0x01FF);
+				*((uint16_t*) pRxBuffer) = (pUSARTHandle->pUSARTx->USART_DR  & (uint16_t)0x01FF);
 
 				//Now increment the pRxBuffer two times
 				pRxBuffer += 2;
@@ -353,7 +354,7 @@ void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_
 			else
 			{
 				//Parity is used, so, 8bits will be of user data and 1 bit is parity
-				 *pRxBuffer = (pUSARTHandle->pUSARTx->DR  & (uint8_t)0xFF);
+				 *pRxBuffer = (pUSARTHandle->pUSARTx->USART_DR  & (uint8_t)0xFF);
 
 				 //Increment the pRxBuffer
 				pRxBuffer++;
@@ -369,7 +370,7 @@ void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_
 				//No parity is used , so all 8bits will be of user data
 
 				//read 8 bits from DR
-				 *pRxBuffer = (uint8_t)(pUSARTHandle->pUSARTx->DR & 0x00FF);
+				 *pRxBuffer = (uint8_t)(pUSARTHandle->pUSARTx->USART_DR & 0x00FF);
 			}
 
 			else
@@ -377,7 +378,7 @@ void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_
 				//Parity is used, so , 7 bits will be of user data and 1 bit is parity
 
 				//read only 7 bits , hence mask the DR with 0X7F
-				 *pRxBuffer = (uint8_t)(pUSARTHandle->pUSARTx->DR & 0x007F);
+				 *pRxBuffer = (uint8_t)(pUSARTHandle->pUSARTx->USART_DR & 0x007F);
 
 			}
 
@@ -391,34 +392,33 @@ void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_
 /*********************************************************************
  * @fn      		  - USART_SendDataWithIT
  *
- * @brief             -
+ * @brief             - Send data in non blocking mode
  *
- * @param[in]         -
- * @param[in]         -
- * @param[in]         -
+ * @param[in]         - pointer to a UART handle
+ * @param[in]         - pointer to transmit buffer
+ * @param[in]         - number of bytes to send
  *
  * @return            -
  *
- * @Note              - Resolve all the TODOs
+ * @Note              -
 
  */
-uint8_t USART_SendDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pTxBuffer, uint32_t Len)
+uint8_t USART_SendDataWithIT(USART_Handle_t *pUSARTHandle,uint8_t *pTxBuffer, uint32_t Len)
 {
-	uint8_t txstate = pUSARTHandle->TODO;
+	uint8_t txstate = pUSARTHandle->TxBusyState;
 
 	if(txstate != USART_BUSY_IN_TX)
 	{
-		pUSARTHandle->TODO = Len;
-		pUSARTHandle->pTxBuffer = TODO;
-		pUSARTHandle->TxBusyState = TODO;
+		pUSARTHandle->TxLen = Len;
+		pUSARTHandle->pTxBuffer = pTxBuffer;
+		pUSARTHandle->TxBusyState = USART_BUSY_IN_TX; // setting this bit to ready will be done in IRQHandling
 
 		//Implement the code to enable interrupt for TXE
-		TODO
+		pUSARTHandle->pUSARTx->USART_CR1 |= (1 << USART_CR1_TXEIE); // 1: An USART interrupt is generated whenever TXE=1 in the USART_SR register
 
 
 		//Implement the code to enable interrupt for TC
-		TODO
-
+		pUSARTHandle->pUSARTx->USART_CR1 |= (1 << USART_CR1_TCIE); // 1: An USART interrupt is generated whenever TC=1 in the USART_SR register
 
 	}
 
@@ -428,34 +428,115 @@ uint8_t USART_SendDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pTxBuffer, uint32
 
 
 /*********************************************************************
- * @fn      		  - USART_ReceiveDataIT
+ * @fn      		  - USART_ReceiveWithDataIT
  *
- * @brief             -
+ * @brief             - Receive data in nonblocking mode
  *
- * @param[in]         -
- * @param[in]         -
- * @param[in]         -
+ * @param[in]         - pointer to a UART handle
+ * @param[in]         - pointer to software receive buffer
+ * @param[in]         - number of bytes to send
  *
  * @return            -
  *
  * @Note              - Resolve all the TODOs
 
  */
-uint8_t USART_ReceiveDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pRxBuffer, uint32_t Len)
+uint8_t USART_ReceiveWithDataIT(USART_Handle_t *pUSARTHandle,uint8_t *pRxBuffer, uint32_t Len)
 {
-	uint8_t rxstate = pUSARTHandle->TODO;
+	uint8_t rxstate = pUSARTHandle->RxBusyState;
 
-	if(rxstate != TODO)
+	if(rxstate != USART_BUSY_IN_RX)
 	{
 		pUSARTHandle->RxLen = Len;
-		pUSARTHandle->pRxBuffer = TODO;
-		pUSARTHandle->RxBusyState = TODO;
+		pUSARTHandle->pRxBuffer = pRxBuffer;
+		pUSARTHandle->RxBusyState = USART_BUSY_IN_RX; // setting this bit to ready will be done in IRQHandling
 
 		//Implement the code to enable interrupt for RXNE
-		TODO
+		pUSARTHandle->pUSARTx->USART_CR1 |= (1 << USART_CR1_RXNE);
 
 	}
 
 	return rxstate;
 
 }
+
+
+
+
+
+
+/*********************************************************************
+ * @fn      		  - USART_SetBaudRate
+ *
+ * @brief             -
+ *
+ * @param[in]         - pointer to UART register definition
+ * @param[in]         - desired baudrate
+ *
+ * @return            -
+ *
+ * @Note              -
+
+ */
+void USART_SetBaudRate(USART_RegDef_t *pUSARTx, uint32_t BaudRate)
+{
+	//Variable to hold the APB clock
+	uint32_t PCLKx;
+
+	uint32_t usartdiv;
+
+	//variables to hold Mantissa and Fraction values
+	uint32_t M_part,F_part;
+
+	uint32_t tempReg=0;
+
+	  //Get the value of APB bus clock in to the variable PCLKx
+	  if(pUSARTx == USART1 || pUSARTx == USART6)
+	  {
+		   //USART1 and USART6 are hanging on APB2 bus
+		   PCLKx = RCC_GetPCLK2Value();
+	  }else
+	  {
+		   PCLKx = RCC_GetPCLK1Value();
+	  }
+
+	  //Check for OVER8 configuration bit
+	  if(pUSARTx->USART_CR1 & (1 << USART_CR1_OVER8))
+	  {
+		   //OVER8 = 1 , over sampling by 8
+		   usartdiv = ((25 * PCLKx) / (2 *BaudRate));
+	  }else
+	  {
+		   //over sampling by 16
+		   usartdiv = ((25 * PCLKx) / (4 *BaudRate));
+	  }
+
+	  //Calculate the Mantissa part
+	  M_part = usartdiv/100;
+
+	  //Place the Mantissa part in appropriate bit position . refer USART_BRR
+	  tempreg |= M_part << 4;
+
+	  //Extract the fraction part
+	  F_part = (usartdiv - (M_part * 100));
+
+	  //Calculate the final fractional
+	  if(pUSARTx->USART_CR1 & (1 << USART_CR1_OVER8))
+	   {
+		  //OVER8 = 1 , over sampling by 8
+		  F_part = ((( F_part * 8)+ 50) / 100)& ((uint8_t)0x07);
+
+	   }else
+	   {
+		   //over sampling by 16
+		   F_part = ((( F_part * 16)+ 50) / 100) & ((uint8_t)0x0F);
+
+	   }
+
+	  //Place the fractional part in appropriate bit position . refer USART_BRR
+	  tempReg |= F_part;
+
+	  //copy the value of tempreg in to BRR register
+	  pUSARTx->USART_BRR = tempReg;
+}
+
