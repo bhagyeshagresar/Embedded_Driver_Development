@@ -7,14 +7,42 @@ This repository contains a collection of bare-metal driver implementations(I2C, 
 **Note:** The file `startup_stm32f401retx.s` and some peripheral definitions are provided by STMicroelectronics as part of the STM32F4 CMSIS/Startup code. Copyright belongs to ST.  
 This repository includes personal modifications and examples for learning purposes.
  
-├── 005HSI_Measurement/       — internal oscillator measurement example using a logic analyser 
-├── 006HSE_Measurement/       — external oscillator measurement example using a logic analyser 
-├── stm32f4xx_drivers/        — core driver library (I2C, SPI, UART, GPIO and MCU specific header file)  
-├── stm32f4xx_drivers/               # Core bare-metal driver folder
-│   ├── Src/                         # Challenges to test driver implementations
-│   ├── Startup/                     
-│       ├── startup_stm32f401retx.s  # STM32 startup assembly file written by ST
-|   ├── Drivers/
-|
-|
+
+```
+├── 005HSI_Measurement/          # Internal oscillator measurement example using a logic analyzer
+├── 006HSE_Measurement/          # External oscillator measurement example using a logic analyzer
+├── stm32f4xx_drivers/           # Core driver library (I2C, SPI, UART, GPIO, and MCU-specific header files)
+│   ├── Src/                     # Challenges to test driver implementations
+│   ├── Startup/
+│   │   └── startup_stm32f401retx.s   # STM32 startup assembly file provided by ST
+│   └── Drivers/
+│       ├── Inc/
+│       │   ├── stm32f401xx.h
+│       │   ├── stm32f4xx_gpio_driver.h
+│       │   ├── stm32f4xx_i2c_driver.h
+│       │   ├── stm32f4xx_spi_driver.h
+│       │   ├── stm32f4xx_usart_driver.h
+│       │   └── stm32f4xx_rcc_driver.h
+│       └── Src/
+│           ├── stm32f4xx_gpio.c
+│           ├── stm32f4xx_i2c.c
+│           ├── stm32f4xx_spi.c
+│           ├── stm32f4xx_usart.c
+│           └── stm32f4xx_rcc.c
 └── README.md
+```
+
+
+# Challenges to test driver implementations located at /stm32f4xx_drivers/Src/
+
+01_led_toggle.c - Simple program that shows how to toggle an onboard led (Nucleo-F401RE) using push-pull vs open-drain configuration using GPIO drivers.
+
+02_led_button.c - Program to use the onboard user btn to toggle the onboard led using GPIO drivers.
+
+03_led_button_ext.c - Program to use an external user btn to toggle an extern led using GPIO drivers.
+
+04_button_interrupt.c - Connect an external button to PD5 pin and toggle the led whenever interrupt is triggered by the button press. Interrupt should be triggered during falling edge of button press.
+
+06_spi_tx_testing.c - Exercise to configure the MCU's SPI2 as master mode and just send a "hello world". This program won't use the slave so only two pins are required, MOSI and SCLK.
+
+10_uart_tx.c -  A simple program to send data over UART from STM32 board to Arduino board. The Arduino board should display the message on the Arduino Serial Monitor, Baudrate : 115200 bps, Frame format: 1 stop bit, 8 data bits, no parity

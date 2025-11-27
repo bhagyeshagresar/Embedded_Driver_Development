@@ -1,6 +1,6 @@
 /*
  * Exercise to configure the MCU's SPI2 as master mode and just send a "hello world". This program won't use the slave so only two pins are required, MOSI and SCLK
- * 006spi_tx_testing.c
+ * 06spi_tx_testing.c
  *
  *
  */
