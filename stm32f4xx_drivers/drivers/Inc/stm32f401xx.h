@@ -474,9 +474,9 @@ typedef struct
 
 
 //these includes are for the main applications files so that a single include of "stm32f401xx" gives you everything related to the MCU
-#include "stm32f401xx_gpio_driver.h"
-#include "stm32f401xx_spi_driver.h"
-#include "stm32f401xx_usart_driver.h"
-#include "stm32f401xx_rcc_driver.h"
+#include <stm32f401xx_gpio_driver.h>
+#include <stm32f401xx_spi_driver.h>
+#include <stm32f401xx_usart_driver.h>
+#include <stm32f401xx_rcc_driver.h>
 
 #endif /* INC_STM32F401XX_H_ */

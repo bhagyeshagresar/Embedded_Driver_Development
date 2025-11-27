@@ -2,7 +2,7 @@
  * stm32f401xx_rcc_driver.c
  *
  */
-#include "stm32f401xx_rcc_driver.h"
+#include <stm32f401xx_rcc_driver.h>
 
 uint16_t AHB_PreScaler[8] = {2,4,8,16,64,128,256,512};
 uint8_t APB1_PreScaler[4] = { 2, 4 , 8, 16};

@@ -7,7 +7,7 @@
 #define INC_STM32F401XX_RCC_DRIVER_H_
 
 
-#include "stm32f401xx.h"
+#include <stm32f401xx.h>
 
 
 uint32_t RCC_GetPCLK1Value(void);

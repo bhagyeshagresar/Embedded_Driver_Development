@@ -44,3 +44,8 @@ Release/
 *.swp
 *.swo
 *.metadata
+
+#Folders for simple programs
+001HelloWorld/
+002DebugOptions/
+

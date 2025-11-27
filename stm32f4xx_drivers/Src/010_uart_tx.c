@@ -7,8 +7,14 @@
 
 
 #include<stdio.h>
+#include <stm32f401xx.h>
 #include<string.h>
-#include "stm32f401xx.h"
+
+
+char msg[1024] = "UART Tx testing...\n\r";
+USART_Handle_t usart2_handle;
+
+
 
 
 void GPIO_ButtonInit()
@@ -44,17 +50,22 @@ void USART2_GPIOInit()
 	GPIO_Handle_t usart2;
 
 	//from the datasheet, PA2 and PA3 can be used for UART TX and UART RX respectively by setting the Alternate functionality to 7
-	//We are setting the same configuration for both the pins
+	//We are setting the same configuration for both the pin
+	//Need to understand why we are setting the same configuration for tx and rx?
 	usart2.pGPIOx = GPIOA;
 	usart2.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN; 		//set it to alternate function mode
 	usart2.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
-	usart2.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU; //from the fram
+	usart2.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
 	usart2.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	usart2.GPIO_PinConfig.GPIO_PinAltFunMode =7;
 
+	//USART2 TX
+	usart2.GPIO_PinConfig.GPIO_PinNumber  = GPIO_PIN_NO_2;
+	GPIO_Init(&usart2);
 
-
-
+	//USART2 RX
+	usart2.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_3;
+	GPIO_Init(&usart2);
 
 
 }
@@ -72,6 +83,7 @@ int main(void)
 	USART2_GPIOInit();
 
 
+	USART2_Init();
 
 	return 0;
 }

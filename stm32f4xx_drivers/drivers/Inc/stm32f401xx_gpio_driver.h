@@ -5,7 +5,7 @@
 #ifndef STM32F401XX_GPIO_DRIVERS_H_
 #define STM32F401XX_GPIO_DRIVERS_H_
 
-#include "stm32f401xx.h"
+#include <stm32f401xx.h>
 
 /*
  * This is a configuration structure for a GPIO pin
