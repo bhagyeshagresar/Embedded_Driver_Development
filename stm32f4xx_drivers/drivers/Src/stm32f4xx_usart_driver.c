@@ -174,6 +174,33 @@ void USART_PeripheralClockControl(USART_RegDef_t *pUSARTx, uint8_t State)
 }
 
 
+/*********************************************************************
+ * @fn      		  - USART_EnableOrDisable
+ *
+ * @brief             - Function to enable or disable the UART peripheral for power consumption
+ *
+ * @param[in]         - Pointer to UART structure
+ * @param[in]         - Disable or Enable
+ * @return            -
+ *
+ * @Note              -
+
+ */
+void USART_EnableOrDisable(USART_RegDef_t *pUSARTx, uint8_t State)
+{
+
+	if(State == ENABLE)
+	{
+		pUSARTx->USART_CR1 |= (1 << USART_CR1_UE); //enable the USART
+	}
+	else
+	{
+		pUSARTx->USART_CR1 &= ~(1 << USART_CR1_UE); //disable UART
+	}
+
+}
+
+
 
 /*********************************************************************
  * @fn      		  - UART_Reset
