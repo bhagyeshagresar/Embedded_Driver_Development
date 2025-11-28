@@ -2,7 +2,7 @@
  * stm32f401xx_rcc_driver.c
  *
  */
-#include <stm32f401xx_rcc_driver.h>
+#include "stm32f401xx_rcc_drivers.h"
 
 //These arrays store the possible division factors for the AHB and APB buses.
 uint16_t AHB_PreScaler[8] = {2,4,8,16,64,128,256,512}; //The AHB prescaler is controlled by RCC_CFGR[7:4] (HPRE bits)
@@ -145,7 +145,7 @@ uint32_t RCC_GetPCLK2Value(void)
 
 		pclk2 =  (SystemClk / ahbp) /apb2p;
 
-		return pclk1;
+		return pclk2;
 }
 
 

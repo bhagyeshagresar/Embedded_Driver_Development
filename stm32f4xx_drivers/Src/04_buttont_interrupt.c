@@ -2,8 +2,7 @@
  * Connect an external button to PD5 pin and toggle the led whenever interrupt is triggered by the button press. Interrupt should be triggered during falling edge of button press
  */
 #include <string.h>
-#include "stm32f401xx.h"
-
+#include "../drivers/Inc/stm32f401xx.h"
 
 void delay(void){
 	for(uint32_t i = 0;i < 500000/2; i++);

@@ -3,10 +3,10 @@
  *
  */
 
-#ifndef INC_STM32F401XX_UART_DRIVER_H_
-#define INC_STM32F401XX_UART_DRIVER_H_
+#ifndef INC_STM32F401XX_UART_DRIVERS_H_
+#define INC_STM32F401XX_UART_DRIVERS_H_
 
-#include <stm32f401xx.h>
+#include "stm32f401xx.h"
 
 
 
@@ -146,7 +146,7 @@ void USART_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 /*
  * Other USART Peripheral APIs
  */
-void USART_PeripheralControl(USART_RegDef_t *pUSARTx, uint8_t State);
+void USART_EnableOrDisable(USART_RegDef_t *pUSARTx, uint8_t State);
 uint8_t USART_GetFlagStatus(USART_RegDef_t *pUSARTx, uint8_t StatusFlagName);
 void USART_ClearFlag(USART_RegDef_t *pUSARTx, uint16_t StatusFlagName);
 void USART_SetBaudRate(USART_RegDef_t *pUSARTx, uint32_t BaudRate);

@@ -4,7 +4,7 @@
  */
 
 
-#include <stm32f401xx_usart_driver.h>
+#include "stm32f401xx_usart_drivers.h"
 
 
 
@@ -360,7 +360,7 @@ void USART_ReceiveData(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_
 	for(uint32_t i = 0 ; i < Len; i++)
 	{
 		//Implement the code to wait until RXNE flag is set in the SR
-		While(!USART_GetFlagStatus(pUSARTHandle->pUSARTx, USART_FLAG_RXNE));
+		while(!USART_GetFlagStatus(pUSARTHandle->pUSARTx, USART_FLAG_RXNE));
 
 		//Check the USART_WordLength to decide whether we are going to receive 9bit of data in a frame or 8 bit
 		if(pUSARTHandle->USART_Config.USART_WordLength == USART_WORDLEN_9BITS)
@@ -542,7 +542,7 @@ void USART_SetBaudRate(USART_RegDef_t *pUSARTx, uint32_t BaudRate)
 	  M_part = usartdiv/100;
 
 	  //Place the Mantissa part in appropriate bit position . refer USART_BRR
-	  tempreg |= M_part << 4;
+	  tempReg |= M_part << 4;
 
 	  //Extract the fraction part
 	  F_part = (usartdiv - (M_part * 100));

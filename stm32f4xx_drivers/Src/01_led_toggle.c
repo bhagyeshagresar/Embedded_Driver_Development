@@ -5,7 +5,6 @@
 
 #include "stm32f401xx.h"
 
-
 void delay(void){
 	for(uint32_t i = 0;i < 500000/2; i++);
 }
@@ -16,7 +15,7 @@ int main(){
 	/*
 	 * Uncomment the below code to run toggle the onboard LED using output mode set to PUSH PULL Configuration
 	 */
-	/*GPIO_Handle_t GpioLED;
+	GPIO_Handle_t GpioLED;
 
 	GpioLED.pGPIOx = GPIOA;
 	GpioLED.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_5;
@@ -31,7 +30,7 @@ int main(){
 	while(1){
 		GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NUM_5);
 		delay();
-	}*/
+	}
 
 
 	/*

@@ -2,10 +2,10 @@
  * stm32f401xx_spi_driver.h
  */
 
-#ifndef INC_STM32F401XX_SPI_DRIVER_H_
-#define INC_STM32F401XX_SPI_DRIVER_H_
+#ifndef INC_STM32F401XX_SPI_DRIVERS_H_
+#define INC_STM32F401XX_SPI_DRIVERS_H_
 
-#include <stm32f401xx.h>
+#include "stm32f401xx.h"
 
 /*
  * Configuration structure for SPI peripheral

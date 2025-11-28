@@ -7,7 +7,7 @@
 
 
 #include<stdio.h>
-#include <stm32f401xx.h>
+#include "stm32f401xx.h"
 #include<string.h>
 
 
@@ -69,15 +69,15 @@ void USART2_GPIOInit()
 	usart2.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN; 		//set it to alternate function mode
 	usart2.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;		//so its tx,the peripheral should be able to drive the pin high and low
 	usart2.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
-	usart2.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
-	usart2.GPIO_PinConfig.GPIO_PinAltFunMode =7;
+	usart2.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;
+	usart2.GPIO_PinConfig.GPIO_PinAltFundMode =7;
 
 	//initialise TX pin
-	usart2.GPIO_PinConfig.GPIO_PinNumber  = GPIO_PIN_NO_2;
+	usart2.GPIO_PinConfig.GPIO_PinNumber  = GPIO_PIN_NUM_2;
 	GPIO_Init(&usart2);
 
 	//initialise RX pin
-	usart2.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_3;
+	usart2.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_3;
 	GPIO_Init(&usart2);
 
 
@@ -109,7 +109,7 @@ int main(void)
 	USART2_GPIOInit();
 
 	//configure the USART2 peripheral and setup all the configuration(baud rate, word length, parity etc.This function calls the USART_Init() function to initialise the peripheral
-	USART2_Init();
+	USART2_Init_Config();
 
 	while(1)
 	{
@@ -117,7 +117,7 @@ int main(void)
 
 		if(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13) == BTN_PRESSED){
 			delay(); //TODO: figure out the actual delay time
-			USART_SendData(&usart2_handle, (uint8_t)*msg, strlen(msg));
+			USART_SendData(&usart2_handle, (uint8_t*)msg, strlen(msg));
 
 		}
 	}
