@@ -3,6 +3,14 @@
  * A simple program to send data over UART from STM32 board to Arduino board. The Arduino board should display the message on the Arduino Serial Monitor
  * Baudrate : 115200 bps
  * Frame format: 1 stop bit, 8 data bits, no parity
+ *
+ * Setup:
+ * Nucleo:
+ * PA2 - TX
+ * PA3 - RX
+ * ESP32:
+ *
+ *
  */
 
 
@@ -116,6 +124,7 @@ int main(void)
 		//we will send data when a button is pressed
 
 		if(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13) == BTN_PRESSED){
+			GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NUM_5);
 			delay(); //TODO: figure out the actual delay time
 			USART_SendData(&usart2_handle, (uint8_t*)msg, strlen(msg));
 
