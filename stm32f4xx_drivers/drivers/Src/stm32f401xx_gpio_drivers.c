@@ -95,6 +95,9 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 	//5. Configure the alternate functionality(TODO: later)
 	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN)
 	{
+		//set the MODER register for alt fn
+		pGPIOHandle->pGPIOx->MODER &= ~(0x3 << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+		pGPIOHandle->pGPIOx->MODER |=  (0x2 << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
 		//configure the alt function register
 		uint8_t temp1, temp2;
 

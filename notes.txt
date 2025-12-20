@@ -1,0 +1,22 @@
+12/17/25:
+working on the UART TX Exercise. the transmission is not working. All the configuration seems to match with what is in the coursework GitHub repo. pTxBuffer gets the data as seen in the expressions tab. The logic analyser does not see any data. The UE and TE bits are 0, that's a big clue
+
+12/19/25:
+
+SPI_Tx_Testing.c - only sending data using master mode
+
+From the reference manual:
+
+Bit 9 SSM: Software slave management
+When the SSM bit is set, the NSS pin input is replaced with the value from the SSI bit.
+0: Software slave management disabled
+1: Software slave management enabled
+Note: This bit is not used in I2S mode and SPI TI mode
+Bit 8 SSI: Internal slave select
+This bit has an effect only when the SSM bit is set. The value of this bit is forced onto the
+NSS pin and the IO value of the NSS pin is ignored.
+Note: This bit is not used in I2S mode and SPI TI mode
+
+SSI defines the internal NSS level.NSS LOW indicates “I am selected as a slave” and this can't work for Master Mode. so we need to set SSM bit and also SSI bit so the NSS pin is pulled to high internally and the 
+MCU acts in master mode
+

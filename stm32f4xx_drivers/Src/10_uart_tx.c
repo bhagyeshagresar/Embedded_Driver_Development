@@ -19,7 +19,7 @@
 #include<string.h>
 
 
-#define USER_BUTTON
+
 
 char msg[1024] = "UART Tx testing...\n\r";
 USART_Handle_t usart2_handle;
@@ -42,14 +42,14 @@ void GPIO_ButtonInit()
 
 	//configure the led pin (PA5) as output,  push pull configuration
 	//set to Push Pull because in open drain output can be either LOW or Hi-Z state
-	GPIOLed.pGPIOx = GPIOA;
+	/*GPIOLed.pGPIOx = GPIOA;
 	GPIOLed.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_5;
 	GPIOLed.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	GPIOLed.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_VHIGH;
 	GPIOLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP; 	//set to push pull output, pull to Vcc when output =1 and pull to GND when output = 0
 	GPIOLed.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
 
-	GPIO_Init(&GPIOLed);
+	GPIO_Init(&GPIOLed);*/
 
 }
 
@@ -76,7 +76,7 @@ void USART2_GPIOInit()
 	usart2.pGPIOx = GPIOA;
 	usart2.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN; 		//set it to alternate function mode
 	usart2.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;		//so its tx,the peripheral should be able to drive the pin high and low
-	usart2.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+	usart2.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;	// why?
 	usart2.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;
 	usart2.GPIO_PinConfig.GPIO_PinAltFundMode =7;
 
@@ -101,7 +101,7 @@ void USART2_Init_Config()
 	usart2_handle.USART_Config.USART_ParityControl = USART_PARITY_DISABLE;
 	usart2_handle.USART_Config.USART_HWFlowControl = USART_HW_FLOW_CTRL_NONE;
 	USART_Init(&usart2_handle); //init the uart peripheral
-	USART_EnableOrDisable(USART2, ENABLE); //enable the UART peripheral
+
 }
 
 
@@ -119,16 +119,25 @@ int main(void)
 	//configure the USART2 peripheral and setup all the configuration(baud rate, word length, parity etc.This function calls the USART_Init() function to initialise the peripheral
 	USART2_Init_Config();
 
+	USART_EnableOrDisable(USART2, ENABLE); //enable the UART peripheral
+
 	while(1)
 	{
 		//we will send data when a button is pressed
 
-		if(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13) == BTN_PRESSED){
+		/*if(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13) == BTN_PRESSED){
 			GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NUM_5);
 			delay(); //TODO: figure out the actual delay time
 			USART_SendData(&usart2_handle, (uint8_t*)msg, strlen(msg));
 
-		}
+		}*/
+
+		while(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13));
+		//GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NUM_5);
+		delay();
+		USART_SendData(&usart2_handle, (uint8_t*)msg, strlen(msg));
+
+
 	}
 
 

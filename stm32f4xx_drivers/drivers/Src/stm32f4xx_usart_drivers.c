@@ -274,10 +274,6 @@ void USART_ClearFlag(USART_RegDef_t *pUSARTx, uint16_t StatusFlagName)
 
 
 
-
-
-
-
 /*********************************************************************
  * @fn      		  - USART_SendData
  *
@@ -289,7 +285,7 @@ void USART_ClearFlag(USART_RegDef_t *pUSARTx, uint16_t StatusFlagName)
  *
  * @return            -
  *
- * @Note              - Resolve all the TODOs
+ * @Note              -
 
  */
 void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t Len)

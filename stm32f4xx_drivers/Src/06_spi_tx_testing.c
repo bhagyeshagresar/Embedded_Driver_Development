@@ -75,11 +75,21 @@ int main(void){
 
 	SPI2_Init(); //initialise the SPI2 peripheral handle structure
 
+	/*
+	 * Note:
+	 * SSI defines the internal NSS level.NSS LOW indicates “I am selected as a slave” and this can't work for Master Mode.
+	 * so we need to set SSM bit and also SSI bit so the NSS pin is pulled to high internally and the MCU acts in master mode
+	*/
+	SPI_SSIConfig(SPI2, ENABLE);
+
 	//enable the SPI peripheral
 	SPI_PeripheralControl(SPI2, ENABLE);
 
 	//SPI send data blocking call
 	SPI_SendData(SPI2, (uint8_t*)user_data, strlen(user_data));
+
+	//disable the SPI peripheral so we can see MOSI and CLK lines switch to idler on the analyser
+	SPI_PeripheralControl(SPI2, DISABLE);
 
 	while(1);
 
