@@ -1,7 +1,8 @@
 /*
- * Exercise to configure the MCU's SPI2 as master mode and just send a "hello world". This program won't use the slave so only two pins are required, MOSI and SCLK
- * 06spi_tx_testing.c
- *
+ * When button on the master STM32 is pressed, master should send string data to Arduino slave.
+ * The data received by the Arduino board will be displayed to the Arduino serial port. In this exercise I am using esp32 so no level shifter is needed.
+ * This program configures master's NSS pin in output mode to drive the slave select low
+ *	07_spi_tx_arduino.c
  *
  */
 
@@ -56,13 +57,13 @@ void SPI2_Init(void){
 	SPI_Handle_t SPI2handle;
 	//fill out the SPI configuration structure and pass it to SPI init to initialise the SPI peripheral
 	SPI2handle.pSPIx = SPI2;
-	SPI2handle.SPIConfig.SPI_BusConfig = SPI_BUS_CONFIG_FD;
+	SPI2handle.SPIConfig.SPI_BusConfig = SPI_BUS_CONFIG_FD; //could go with half-duplex for this test since we are not receiving data from esp32
 	SPI2handle.SPIConfig.SPI_DeviceMode = SPI_DEVICE_MODE_MASTER;
-	SPI2handle.SPIConfig.SPI_SclkSpeed = SPI_SCLK_SPEED_DIV2; //gives sclk of 8MHz
+	SPI2handle.SPIConfig.SPI_SclkSpeed = SPI_SCLK_SPEED_DIV8; //gives sclk of 2MHz ( no particular reason why)
 	SPI2handle.SPIConfig.SPI_DFF = SPI_DFF_8BITS;
 	SPI2handle.SPIConfig.SPI_CPOL = SPI_CPOL_LOW;
 	SPI2handle.SPIConfig.SPI_CPHA = SPI_CPHA_LOW;
-	SPI2handle.SPIConfig.SPI_SSM = SPI_SSM_EN; //Software Slave Management enabled for NSS pin. NSS pin is ignored.
+	SPI2handle.SPIConfig.SPI_SSM = SPI_SSM_DI; //Software Slave Management disabled for NSS pin, NSS pin is controlled by the hardware
 
 	SPI_Init(&SPI2handle);
 }
@@ -77,10 +78,9 @@ int main(void){
 
 	/*
 	 * Note:
-	 * SSI defines the internal NSS level.NSS LOW indicates “I am selected as a slave” and this can't work for Master Mode.
-	 * so we need to set SSM bit and also SSI bit so the NSS pin is pulled to high internally and the MCU acts in master mode
+	 * For master: NSS output will be enabled when SSOE = 1. When SSOE = 1, SPE = 1, NSS = 0 (NSS is pulled to low when you enable the peripheral). NSS = 1 when SPE = 0
 	*/
-	SPI_SSIConfig(SPI2, ENABLE);
+	SPI_SSOEConfig(SPI2, ENABLE);
 
 	//enable the SPI peripheral
 	SPI_PeripheralControl(SPI2, ENABLE);

@@ -1,9 +1,21 @@
 12/17/25:
 working on the UART TX Exercise. the transmission is not working. All the configuration seems to match with what is in the coursework GitHub repo. pTxBuffer gets the data as seen in the expressions tab. The logic analyser does not see any data. The UE and TE bits are 0, that's a big clue
 
+
+/*******************SPI Application Development Notes********************\
+
+All the configuration stuff for the peripheral should be done while the SPI is disabled.
+
+
 12/19/25:
 
-SPI_Tx_Testing.c - only sending data using master mode
+SPI_Tx_Testing.c - only sending data using master mode, we use Software Slave Management configuration in this case
+
+Problem: Testing for this had a problem. The MSTR bit was getting reset after enabling the SPI peripheral. The MODF bit was set and that resets the MSTR bit meaning setting the stm32 in slave mode. In this 
+configuration (SSM = 1), the master's NSS signal should be pulled to high (Vcc) to avoid the MODF error. This error happens in multi-master mode. So let's make SSI = 1 to pull NSS to Vcc. SSI bit influences 
+NSS state when SSM = 1. By default SSI = 0 so NSS will be pulled to low which is not acceptable for master when working in non multi-master mode.
+
+Solution:
 
 From the reference manual:
 
@@ -18,5 +30,37 @@ NSS pin and the IO value of the NSS pin is ignored.
 Note: This bit is not used in I2S mode and SPI TI mode
 
 SSI defines the internal NSS level.NSS LOW indicates “I am selected as a slave” and this can't work for Master Mode. so we need to set SSM bit and also SSI bit so the NSS pin is pulled to high internally and the 
-MCU acts in master mode
+MCU acts in master mode.
+
+After making the above changes, data is visible on the logic analyser
+
+
+12/24/25:
+
+SPI_Tx_Arduino.c - send data in master mode to esp32, hardware slave management is enabled (SSM = 0). The NSS pin on the slave needs to be pulled low otherwise the MISO and MOSI pins
+on the slave will remain in High-Z state. This configuration for the NSS pin for the master can be used to drive a slave select signal of a single pin.
+
+For master: NSS output will be enabled when SSOE = 1. When SSOE = 1, SPE = 1, NSS = 0 (NSS is pulled to low when you enable the peripheral). NSS = 1 when SPE = 0
+
+The below is from the reference manual:
+
+Slave select (NSS) pin management:
+
+Hardware or software slave select management can be set using the SSM bit in the
+SPI_CR1 register.
+• Software NSS management (SSM = 1)
+The slave select information is driven internally by the value of the SSI bit in the
+SPI_CR1 register. The external NSS pin remains free for other application uses.
+• Hardware NSS management (SSM = 0)
+Two configurations are possible depending on the NSS output configuration (SSOE bit
+in register SPI_CR2).
+– NSS output enabled (SSM = 0, SSOE = 1)
+This configuration is used only when the device operates in master mode. The
+NSS signal is driven low when the master starts the communication and is kept
+low until the SPI is disabled.
+– NSS output disabled (SSM = 0, SSOE = 0)
+This configuration allows multimaster capability for devices operating in master
+mode. For devices set as slave, the NSS pin acts as a classical NSS input: the
+slave is selected when NSS is low and deselected when NSS high.
+
 
