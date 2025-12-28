@@ -63,4 +63,6 @@ This configuration allows multimaster capability for devices operating in master
 mode. For devices set as slave, the NSS pin acts as a classical NSS input: the
 slave is selected when NSS is low and deselected when NSS high.
 
+12/27/25:
+Added SPI_BUSY_FLAG check to make sure the spi peripheral is done sending bytes before the peripheral is disabled in SPI_Tx_Arduino.c and SPI_Tx_Testing.c
 

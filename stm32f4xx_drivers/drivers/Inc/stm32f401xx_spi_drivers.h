@@ -98,7 +98,7 @@ typedef struct
  */
 #define SPI_TXE_FLAG		(1 << SPI_SR_TXE) //this sits here because it is SPI specific
 #define SPI_RXNE_FLAG		(1 << SPI_SR_RXNE) //this sits here because it is SPI specific
-
+#define SPI_BUSY_FLAG 		(1 << SPI_SR_BSY) 	 //this sits here because it is SPI specific
 
 
 /****************************************
@@ -136,5 +136,11 @@ void SPI_IRQHandling(SPI_Handle_t *pSPIHandle);
 void SPI_PeripheralControl(SPI_RegDef_t *pSPIx, uint8_t EnOrDi);
 void SPI_SSIConfig(SPI_RegDef_t *pSPIx, uint8_t EnOrDi);
 void SPI_SSOEConfig(SPI_RegDef_t *pSPIx, uint8_t EnOrDi);
+
+/*
+ * SPI Flag Status API
+ */
+uint8_t SPI_GetFlagStatus(SPI_RegDef_t *pSPIx, uint32_t FlagName);
+
 
 #endif /* INC_STM32F401XX_SPI_DRIVER_H_ */

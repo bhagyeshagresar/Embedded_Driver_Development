@@ -19,6 +19,29 @@
  */
 
 
+//TODO: add an appriate delay for switch debouncing
+void delay(void){
+	for(uint32_t i = 0;i < 500000/2; i++);
+}
+
+
+
+void GPIO_ButtonInit()
+{
+	GPIO_Handle_t GPIOBtn, GPIOLed; //these are struct variables and not pointers so cannot use -> operator
+
+	//configure the gpio pin for the button PC13
+	GPIOBtn.pGPIOx = GPIOC;  									//this is a pointer to GPIOC baseaddress
+	GPIOBtn.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_13; 	//Configure the PIN number 13
+	GPIOBtn.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;			//Configure the pin as input
+	GPIOBtn.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;		//Set high speed
+	GPIOBtn.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;	// the nucleo board already has a pull-up resistor connected to this pin, the configuration is ACTIVE LOW
+
+	GPIO_Init(&GPIOBtn);
+
+}
+
+
 //This function is used to initialise the GPIO pins to behave as SPI2 pins
 void SPI2_GPIOInit(void)
 {
@@ -73,6 +96,8 @@ int main(void){
 
 	SPI2_GPIOInit(); //initialise the gpio pins for SPI2
 
+	GPIO_ButtonInit();
+
 	SPI2_Init(); //initialise the SPI2 peripheral handle structure
 
 	/*
@@ -85,13 +110,26 @@ int main(void){
 	//enable the SPI peripheral
 	SPI_PeripheralControl(SPI2, ENABLE);
 
-	//SPI send data blocking call
-	SPI_SendData(SPI2, (uint8_t*)user_data, strlen(user_data));
 
-	//disable the SPI peripheral so we can see MOSI and CLK lines switch to idler on the analyser
-	SPI_PeripheralControl(SPI2, DISABLE);
 
-	while(1);
+	while(1)
+	{
+		while(!GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13));
+
+		delay();
+
+		//SPI send data blocking call
+		SPI_SendData(SPI2, (uint8_t*)user_data, strlen(user_data));
+
+		/*
+		 * Confirm if SPI is busy.
+		 * Note: This is important otherwise the peripheral will get disabled immediately after sending data
+		 */
+		while(SPI_GetFlagStatus(SPI2, SPI_BUSY_FLAG));
+
+		//disable the SPI peripheral so we can see MOSI and CLK lines switch to idler on the analyser
+		SPI_PeripheralControl(SPI2, DISABLE);
+	}
 
 
 	return 0;
