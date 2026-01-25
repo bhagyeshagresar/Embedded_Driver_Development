@@ -108,15 +108,18 @@ int main(void){
 	SPI_SSIConfig(SPI2, ENABLE);
 
 	//enable the SPI peripheral
-	SPI_PeripheralControl(SPI2, ENABLE);
+	//SPI_PeripheralControl(SPI2, ENABLE);
 
 
 
 	while(1)
 	{
-		while(!GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13));
+		while(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13));
 
 		delay();
+
+		//enable the SPI peripheral
+		SPI_PeripheralControl(SPI2, ENABLE);
 
 		//SPI send data blocking call
 		SPI_SendData(SPI2, (uint8_t*)user_data, strlen(user_data));

@@ -12,10 +12,10 @@
 
 /* Configure SPI2, Alternate function number 5 (AF5)
  * From the datasheet Table 9. Alternate function mapping
- * PB15 - MOSI
- * PB14 - MISO
- * PB13 - SCK
- * PB12 - NSS
+ * PB15 - MOSI yellow
+ * PB14 - MISO green
+ * PB13 - SCK blue wire
+ * PB12 - NSS brown
  *
  */
 
@@ -67,8 +67,8 @@ void SPI2_GPIOInit(void)
 	GPIO_Init(&SPI2Pins);*/
 
 	//NSS
-	/*SPI2Pins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_12;
-	GPIO_Init(&SPI2Pins);*/
+	SPI2Pins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUM_12;
+	GPIO_Init(&SPI2Pins);
 
 
 }
@@ -106,16 +106,18 @@ int main(void){
 	*/
 	SPI_SSOEConfig(SPI2, ENABLE);
 
-	//enable the SPI peripheral
-	SPI_PeripheralControl(SPI2, ENABLE);
+
 
 
 	while(1)
 	{
 
-		while(!GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13));
+		while(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NUM_13));
 
 		delay();
+
+		//enable the SPI peripheral
+		SPI_PeripheralControl(SPI2, ENABLE);
 
 		//arduino sketch expects length information
 		uint8_t dataLen = strlen(user_data);
