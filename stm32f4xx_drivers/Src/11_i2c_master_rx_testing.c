@@ -21,6 +21,9 @@
 #define MASTER_ADDR			0x61
 #define SLAVE_ADDR			0x68
 #define WHO_AM_I_ADDR		0x75 //stores 0x68 as its value
+#define ACCELZ_HIGH_ADDR	0x3F
+#define ACCELZ_LOW_ADDR		0x40
+#define PWR_MGMT_1_ADDR		0x6B
 
 //TODO: add an appriate delay for switch debouncing
 void delay(void){
@@ -89,7 +92,7 @@ void I2C1_Init(void){
 
 int main(void){
 
-	uint8_t commandCode = WHO_AM_I_ADDR;
+	uint8_t commandCode;
 
 	I2C1_GPIOInit(); //initialise the gpio pins for I2C1
 
@@ -113,11 +116,35 @@ int main(void){
 		//to avoid button de-bouncing related issues 200ms of delay
 		delay();
 
-		//send what register to read from
+		//step 1: Read the who_am_I register
+		commandCode = WHO_AM_I_ADDR;
+		//send what register to read from - who_am_I
+		//since there is only one master and slave, repeated start enabling is not important, as no other master can access control of the bus
 		I2C_MasterSendData(&I2C1_Handle,&commandCode,1,SLAVE_ADDR, I2C_DISABLE_SR);
 
 		//read 1 byte from the register on the MPU6050, should return 0x68
 		I2C_MasterReceiveData(&I2C1_Handle, rcv_buffer, 1, SLAVE_ADDR, I2C_DISABLE_SR);
+		memset(rcv_buffer, 0, sizeof(rcv_buffer));
+
+		//step2: write the PWR_MGMT Register to 0x00 to wake up the sensor
+		commandCode = PWR_MGMT_1_ADDR;
+		uint8_t data[2];
+		data[0] = PWR_MGMT_1_ADDR;
+		data[1] = 0x00;   // wake up value
+
+
+		I2C_MasterSendData(&I2C1_Handle,data,2,SLAVE_ADDR, I2C_DISABLE_SR);
+
+		commandCode = ACCELZ_HIGH_ADDR;
+
+		//step 2: see if you can directly read accel readings, raw is fine for now
+
+		//send what register to read from - accelerometer along the Z axis
+		I2C_MasterSendData(&I2C1_Handle,&commandCode,1,SLAVE_ADDR, I2C_DISABLE_SR);
+
+		//read 2 byte from the register on the MPU6050, should return 0x68
+		I2C_MasterReceiveData(&I2C1_Handle, rcv_buffer, 2, SLAVE_ADDR, I2C_DISABLE_SR);
+
 
 
 

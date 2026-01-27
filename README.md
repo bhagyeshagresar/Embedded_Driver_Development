@@ -32,6 +32,13 @@ This repository includes personal modifications and examples for learning purpos
 └── README.md
 ```
 
+# Implementing the I2C Application code to test master send/receive to a MPU6050
+![Description of the image](./images/logic_analyser_trace_reading_accel_z_reading.jpg.png)
+
+Successfully established I2C communication with the MPU6050 sensor. Communication was first verified by reading the WHO_AM_I register. After confirming this, the sensor was taken out of sleep mode by writing 0x00 to the PWR_MGMT_1 register, and raw accelerometer data along the Z-axis was read. This code implementation does not use repeated start. It will be important to implement that feature when there are multiple masters to avoid them from accidentally pull the SCL line low to control the I2C bus.
+
+At this stage, the application focuses on validating correct I2C register access (read/write). While no higher-level processing is implemented yet, the transmit and receive APIs are functioning correctly and provide a reliable base for future development. 
+
 
 # Challenges to test driver implementations located at /stm32f4xx_drivers/Src/
 
@@ -46,3 +53,5 @@ This repository includes personal modifications and examples for learning purpos
 06_spi_tx_testing.c - Exercise to configure the MCU's SPI2 as master mode and just send a "hello world". This program won't use the slave so only two pins are required, MOSI and SCLK.
 
 10_uart_tx.c -  A simple program to send data over UART from STM32 board to Arduino board. The Arduino board should display the message on the Arduino Serial Monitor, Baudrate : 115200 bps, Frame format: 1 stop bit, 8 data bits, no parity
+
+11_i2c_master_rx_testing.c - Simple program to read raw accel data from MPU6050 using I2C
