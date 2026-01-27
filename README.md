@@ -33,8 +33,9 @@ This repository includes personal modifications and examples for learning purpos
 ```
 
 ## Implementing the I2C Application code to test master send/receive to a MPU6050
-![alt text](./images/logic_analyser_trace_reading_accel_z_reading.jpg)
-![alt text](./images/logic_analyser_trace_reading_accel_z_reading_zoom.jpg)
+![Reading the I2C data exchange using a logic Analyser](./images/logic_analyser_trace_reading_accel_z_reading.jpg)
+*Reading the I2C data exchange using a logic Analyser*
+![](./images/logic_analyser_trace_reading_accel_z_reading_zoom.jpg)
 
 Successfully established I2C communication with the MPU6050 sensor. Communication was first verified by reading the WHO_AM_I register. After confirming this, the sensor was taken out of sleep mode by writing 0x00 to the PWR_MGMT_1 register, and raw accelerometer data along the Z-axis was read. This code implementation does not use repeated start. It will be important to implement that feature when there are multiple masters to avoid them from accidentally pull the SCL line low to control the I2C bus.
 
