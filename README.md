@@ -32,7 +32,7 @@ This repository includes personal modifications and examples for learning purpos
 └── README.md
 ```
 
-### Implementing the I2C Application code to test master send/receive to a MPU6050
+# Implementing the I2C Application code to test master send/receive to a MPU6050
 ![Reading the I2C data exchange using a logic Analyser](./images/logic_analyser_trace_reading_accel_z_reading.jpg)
 *Reading the I2C data exchange using a logic Analyser*
 ![](./images/logic_analyser_trace_reading_accel_z_reading_zoom.jpg)
@@ -42,7 +42,7 @@ Successfully established I2C communication with the MPU6050 sensor. Communicatio
 At this stage, the application focuses on validating correct I2C register access (read/write). While no higher-level processing is implemented yet, the transmit and receive APIs are functioning correctly and provide a reliable base for future development. 
 
 
-### Challenges to test driver implementations located at /stm32f4xx_drivers/Src/
+# Challenges to test driver implementations located at /stm32f4xx_drivers/Src/
 
 01_led_toggle.c - Simple program that shows how to toggle an onboard led (Nucleo-F401RE) using push-pull vs open-drain configuration using GPIO drivers.
 
